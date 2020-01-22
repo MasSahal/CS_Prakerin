@@ -71,13 +71,16 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password2" required placeholder="Retype password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+        <div class="form-group mb-3">
+          <div class="input-group ">
+            <input type="password" class="form-control" name="password2" required placeholder="Retype password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
             </div>
           </div>
+          <small>Minimal 10 karakter</small>
         </div>
         <div class="row">
           <div class="col">
@@ -122,21 +125,25 @@ if (isset($_POST['daftar'])) {
   $password2 = $_POST['password2'];
   $date = date('Y-m-d');
 
-  $cek = $koneksi->query("SELECT * FROM tb_akun WHERE email_akun='$email'");
-  $cek_lagi = $cek->num_rows;
+  $cek = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE email_akun='$email'");
+  $cek_lagi = mysqli_num_rows($cek);
   if ($cek_lagi !=0) {
     echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Akun Sudah Terdaftar!'});</script>";
   }else{
     if($password != $password2){
       echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Password Tidak Sama!'});</script>";
     }else{
-      $add = $koneksi->query("INSERT INTO tb_akun (username_akun, email_akun, telepon_akun, password_akun, alamat_akun, status_akun, akses_akun, registrasi_akun)
-      VALUES('$username','$email','$telepon',md5('$password'),'$alamat','Tidak Aktif','user','$date')");
-      if (!$add) {
-        echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal Tambah Akun !'});</script>";
+      if (strlen($password) < 10) {
+        echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Password minimal 10 karakter !'});</script>";
       }else{
-        echo"<script>Swal.fire('Good job!','Akun Berhasil di buat!','success')</script>";
-        echo"<meta http-equiv='refresh' content='3;url=index.php'>";
+        $add = mysqli_query($koneksi,"INSERT INTO tb_akun (username_akun, email_akun, telepon_akun, password_akun, alamat_akun, status_akun, akses_akun, registrasi_akun)
+        VALUES('$username','$email','$telepon',md5('$password'),'$alamat','Tidak Aktif','user','$date')");
+        if (!$add) {
+          echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal Tambah Akun !'});</script>";
+        }else{
+          echo"<script>Swal.fire('Good job!','Akun Berhasil di buat!','success')</script>";
+          echo"<meta http-equiv='refresh' content='3;url=index.php'>";
+        }
       }
     }
   }

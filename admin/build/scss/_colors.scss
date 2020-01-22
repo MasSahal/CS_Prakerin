@@ -61,6 +61,15 @@ a.text-muted:hover {
     color: darken($gray-500, 40%);
   }
 }
+// Link Styles2
+.link-white {
+  color: darken(white, 90%);
+
+  &:hover,
+  &:focus {
+    color: darken(black, 90%);
+  }
+}
 
 .link-black {
   color: $gray-600;

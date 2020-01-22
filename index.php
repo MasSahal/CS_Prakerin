@@ -37,7 +37,7 @@ include('koneksi.php');
 
         <form method="post">
           <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email" name="email">
+            <input type="email" class="form-control" placeholder="Email" aria-describedby="emailHelpId" required name="email">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -45,7 +45,7 @@ include('koneksi.php');
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Password" name="password">
+            <input type="password" class="form-control" placeholder="Password" required name="password">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -65,6 +65,9 @@ include('koneksi.php');
           <!-- /.col -->
           <div class="my-2">
             <button type="submit" name="login" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <div class="my-2">
+            <a href="user/" class="btn btn-block btn-outline-secondary">Login Later!</a>
           </div>
           <!-- /.col -->
         </form>
@@ -108,17 +111,24 @@ include('koneksi.php');
 
 </html>
 <?php
+if(isset($_SESSION['akses'])){
+  if ($_SESSION['akses']=='admin') {
+    echo "<meta http-equiv='refresh' content='0;url=admin/index.php'>";
+    } elseif ($_SESSION['akses']=='user') {
+      echo "<meta http-equiv='refresh' content='0;url=user/index.php'>";
+    }
+}
 if (isset($_POST['login'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];
 
-  $query = $koneksi->query("SELECT * FROM tb_akun WHERE email_akun='$email' AND password_akun=md5('$password')");
-  $login = $query->num_rows;
+  $query = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE email_akun='$email' AND password_akun=md5('$password')");
+  $login = mysqli_num_rows($query);
   if ($login == 0) {
     echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Akun Tidak Ditemukan!'});</script>";
   } else {
     //pecahkan data ke array
-    $data  = $query->fetch_assoc();
+    $data  = mysqli_fetch_assoc($query);
     if ($data['status_akun'] == "Tidak Aktif") {
       echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Akun Tidak Aktif!'});</script>";
     } elseif ($data['status_akun'] == "Aktif") {

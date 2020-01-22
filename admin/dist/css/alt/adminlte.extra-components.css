@@ -242,6 +242,9 @@
 .info-box .info-box .bg-gradient-light {
   color: #1F2D3D;
 }
+.bg-semidark{
+  background-color: rgb(100, 100, 100);
+}
 
 .info-box .info-box .bg-light .progress-bar,
 .info-box .info-box .bg-gradient-light .progress-bar {

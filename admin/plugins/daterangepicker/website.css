@@ -4,6 +4,9 @@ body {
     position: relative;
     margin: 0;
 }
+.bg-gray{
+    background-color: #f8f9fa!important;
+}
 
 .navbar .nav-item {
     padding: 8px 0 8px 20px;
@@ -97,6 +100,7 @@ label {
 .container {
     max-width: 1300px;
 }
+
 
 @media (min-width: 980px) {
     .rightcol {

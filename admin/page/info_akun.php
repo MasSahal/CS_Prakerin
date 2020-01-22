@@ -1,8 +1,8 @@
 <?php
 
 $id = $_GET['id'];
-$edit = $koneksi->query("SELECT * FROM tb_akun WHERE id_akun='$id'");
-$data = $edit->fetch_assoc();
+$edit = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE id_akun='$id'");
+$data = mysqli_fetch_assoc($edit);
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -33,7 +33,7 @@ $data = $edit->fetch_assoc();
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col">
-                    <div class="card card-primary card-outline">
+                    <div class="card card-danger card-outline">
                         <div class="card-header">
                             <h5 class="card-title m-0">Info Akun <?= $data['username_akun']; ?></h5>
                         </div>
@@ -135,9 +135,9 @@ $data = $edit->fetch_assoc();
                                     <tbody>
 
                                         <?php
-                                        $query = $koneksi->query("SELECT * FROM tb_akun WHERE akses_akun='user' AND id_akun!='$id'");
+                                        $query = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE akses_akun='user' AND id_akun!='$id'");
                                         $no = 0;
-                                        while ($data = $query->fetch_assoc()) {
+                                        while ($data = mysqli_fetch_assoc($query)) {
                                         ?>
                                             <tr>
                                                 <td><?= $no += 1; ?></td>
@@ -195,9 +195,9 @@ $data = $edit->fetch_assoc();
                                     <tbody>
 
                                         <?php
-                                        $query = $koneksi->query("SELECT * FROM tb_akun WHERE akses_akun='admin' AND id_akun!='$id'");
+                                        $query = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE akses_akun='admin' AND id_akun!='$id'");
                                         $no = 0;
-                                        while ($data = $query->fetch_assoc()) {
+                                        while ($data = mysqli_fetch_assoc($query)) {
                                         ?>
                                             <tr>
                                                 <td><?= $no += 1; ?></td>
@@ -379,7 +379,7 @@ $data = $edit->fetch_assoc();
 
 <?php
 if (isset($_POST['aktifkan'])) {
-    $aktif = $koneksi->query("UPDATE tb_akun SET status_akun='Aktif' WHERE id_akun='$id'");
+    $aktif = mysqli_query($koneksi,"UPDATE tb_akun SET status_akun='Aktif' WHERE id_akun='$id'");
     if ($aktif) {
         echo"<script>Swal.fire('Good job!','Berhasil Mengaktifkan Akun !','success')</script>";
         echo"<meta http-equiv='refresh' content='2;url=index.php?page=info_akun&id=$id'>";
@@ -388,7 +388,7 @@ if (isset($_POST['aktifkan'])) {
     }
 }
 if (isset($_POST['nonaktif'])) {
-    $nonaktif = $koneksi->query("UPDATE tb_akun SET status_akun='Tidak Aktif' WHERE id_akun='$id'");
+    $nonaktif = mysqli_query($koneksi,"UPDATE tb_akun SET status_akun='Tidak Aktif' WHERE id_akun='$id'");
     if ($nonaktif) {
         echo"<script>Swal.fire('Good job!','Berhasil Menonaktifkan Akun !','success')</script>";
         echo"<meta http-equiv='refresh' content='2;url=index.php?page=info_akun&id=$id'>";
@@ -397,7 +397,7 @@ if (isset($_POST['nonaktif'])) {
     }
 }
 if (isset($_POST['hapus'])) {
-    $hapus = $koneksi->query("DELETE FROM tb_akun WHERE id_akun='$id'");
+    $hapus = mysqli_query($koneksi,"DELETE FROM tb_akun WHERE id_akun='$id'");
     if ($hapus) {
         echo"<script>Swal.fire('Good job!','Berhasil Menghapus Akun !','success')</script>";
         echo"<meta http-equiv='refresh' content='2;url=index.php?page=akun'>";
@@ -415,15 +415,15 @@ if (isset($_POST['tambahuser'])) {
     $password2 = $_POST['password2'];
     $date = date('Y-m-d');
 
-    $cek = $koneksi->query("SELECT * FROM tb_akun WHERE email_akun='$email' AND akses_akun='user'");
-    $cek_lagi = $cek->num_rows;
+    $cek = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE email_akun='$email' AND akses_akun='user'");
+    $cek_lagi = mysqli_num_rows($cek);
     if ($cek_lagi !=0) {
     echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Akun Sudah Terdaftar!'});</script>";
     }else{
     if($password != $password2){
         echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Password Tidak Sama!'});</script>";
     }else{
-        $add = $koneksi->query("INSERT INTO tb_akun (username_akun, email_akun, telepon_akun, password_akun, alamat_akun, status_akun, akses_akun, registrasi_akun)
+        $add = mysqli_query($koneksi,"INSERT INTO tb_akun (username_akun, email_akun, telepon_akun, password_akun, alamat_akun, status_akun, akses_akun, registrasi_akun)
         VALUES('$username','$email','$telepon',md5('$password'),'$alamat','Tidak Aktif','user','$date')");
         if (!$add) {
         echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal Tambah Akun !'});</script>";
@@ -443,15 +443,15 @@ if (isset($_POST['tambahadmin'])) {
     $password2 = $_POST['password2'];
     $date = date('Y-m-d');
     
-    $cek = $koneksi->query("SELECT * FROM tb_akun WHERE email_akun='$email' AND akses_akun='admin'");
-    $cek_lagi = $cek->num_rows;
+    $cek = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE email_akun='$email' AND akses_akun='admin'");
+    $cek_lagi = mysqli_num_rows($cek);
     if ($cek_lagi !=0) {
         echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Akun Sudah Terdaftar!'});</script>";
     }else{
         if($password != $password2){
         echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Password Tidak Sama!'});</script>";
         }else{
-        $add = $koneksi->query("INSERT INTO tb_akun (username_akun, email_akun, telepon_akun, password_akun, alamat_akun, status_akun, akses_akun, registrasi_akun)
+        $add = mysqli_query($koneksi,"INSERT INTO tb_akun (username_akun, email_akun, telepon_akun, password_akun, alamat_akun, status_akun, akses_akun, registrasi_akun)
         VALUES('$username','$email','$telepon',md5('$password'),'$alamat','Tidak Aktif','admin','$date')");
         if (!$add) {
             echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal Tambah Akun !'});</script>";

@@ -1,6 +1,8 @@
 <?php 
 session_start();
+
 include('../koneksi.php');
+$profile = $_SESSION['akun']['email_akun'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,6 +56,7 @@ include('../koneksi.php');
 
         <!-- Content Wrapper. Contains page content -->
         <?php
+        
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
         } else {
@@ -96,6 +99,7 @@ include('../koneksi.php');
                 include('page/dashboard.php');
                 break;
         }
+        
         ?>
         <!-- /.content-wrapper -->
         <footer class="main-footer">

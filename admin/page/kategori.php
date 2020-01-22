@@ -39,9 +39,9 @@
                                     <tbody>
 
                                         <?php
-                                        $query = $koneksi->query("SELECT * FROM tb_kategori");
+                                        $query = $query = mysqli_query($koneksi,"SELECT * FROM tb_kategori");
                                         $no = 0;
-                                        while ($data = $query->fetch_assoc()) {
+                                        while ($data = mysqli_fetch_assoc($query)) {
                                         ?>
                                             <tr>
                                                 <td><?= $no += 1; ?></td>
@@ -62,8 +62,8 @@
                                                                 <form role="form" method="post">
                                                                     <?php
                                                                     $id = $data['id_kategori'];
-                                                                    $sql = $koneksi->query("SELECT * FROM tb_kategori WHERE id_kategori='$id'");
-                                                                    $data = $sql->fetch_assoc();
+                                                                    $sql = mysqli_query($koneksi,"SELECT * FROM tb_kategori WHERE id_kategori='$id'");
+                                                                    $data = mysqli_fetch_assoc($sql);
                                                                     ?>
                                                                     <div class="modal-body">
                                                                         <input type="hidden" name="id" value="<?= $data['id_kategori']; ?>">
@@ -136,7 +136,7 @@ if (isset($_POST['tambah'])) {
     $nama = $_POST['nama'];
     $subjek = $_POST['subjek'];
 
-    $add = $koneksi->query("INSERT INTO tb_kategori (kategori,subjek_kategori) VALUES ('$nama','$subjek')");
+    $add = $query = mysqli_query($koneksi,"INSERT INTO tb_kategori (kategori,subjek_kategori) VALUES ('$nama','$subjek')");
     if ($add) {
         echo"<div class='kategoriberhasil'></div>
         <meta http-equiv='refresh' content='1;url=?page=kategori'>";
@@ -149,7 +149,7 @@ if (isset($_POST['ubah'])) {
     $nama = $_POST['nama'];
     $subjek = $_POST['subjek'];
 
-    $edit = $koneksi->query("UPDATE tb_kategori SET kategori='$nama', subjek_kategori='$subjek' WHERE id_kategori='$id'");
+    $edit = $query = mysqli_query($koneksi, "UPDATE tb_kategori SET kategori='$nama', subjek_kategori='$subjek' WHERE id_kategori='$id'");
 
     if ($edit) {
         echo "

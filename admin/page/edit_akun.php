@@ -1,7 +1,7 @@
-<?php
+    <?php
 $id = $_GET['id'];
-$edit = $koneksi->query("SELECT * FROM tb_akun WHERE id_akun='$id'");
-$data = $edit->fetch_assoc();
+$edit = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE id_akun='$id'");
+$data = mysqli_fetch_assoc($edit);
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -149,13 +149,17 @@ if (isset($_POST['gantiPass'])) {
     if ($password != $password2) {
         echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Password Tidak Sama !'});</script>";
     }else{
-        $ubahPw = $koneksi->query("UPDATE tb_akun SET password_akun=md5('$password') WHERE id_akun='$id'");
-
-        if ($ubahPw) {
-            echo"<script>Swal.fire('Good job!','Berhasil Mengganti Password !','success')</script>";
-            echo"<meta http-equiv='refresh' content='2;url=index.php?page=edit_akun&id=$id'>";
+        if (strlen($password) < 10) {
+            echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Password minimal 10 karakter !'});</script>";
         }else{
-            echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal Mengganti Password !'});</script>";
+            $ubahPw = mysqli_query($koneksi,"UPDATE tb_akun SET password_akun=md5('$password') WHERE id_akun='$id'");
+
+            if ($ubahPw) {
+                echo"<script>Swal.fire('Good job!','Berhasil Mengganti Password !','success')</script>";
+                echo"<meta http-equiv='refresh' content='2;url=index.php?page=edit_akun&id=$id'>";
+            }else{
+                echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal Mengganti Password !'});</script>";
+            }
         }
     }
 }

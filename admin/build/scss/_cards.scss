@@ -129,6 +129,133 @@
   }
 
 }
+.card {
+  @include box-shadow($card-shadow);
+  margin-bottom: map-get($spacers, 3);
+
+  &.bg-dark {
+    .card-header {
+      border-color: $card-dark-border-color;
+    }
+
+    &,
+    .card-body {
+      color: $white;
+    }
+  }
+
+  &.maximized-card {
+    height: 100% !important;
+    left: 0;
+    max-height: 100% !important;
+    max-width: 100% !important;
+    position: fixed;
+    top: 0;
+    width: 100% !important;
+    z-index: 9999;
+
+    &.was-collapsed .card-body {
+      display: block !important;
+    }
+
+    [data-widget='collapse'] {
+      display: none;
+    }
+
+    .card-header,
+    .card-footer {
+      @include border-radius(0 !important);
+    }
+  }
+
+  // collapsed mode
+  &.collapsed-card {
+    .card-body,
+    .card-footer {
+      display: none;
+    }
+  }
+
+  .nav.flex-column {
+    > li {
+      border-bottom: 1px solid $card-border-color;
+      margin: 0;
+
+      &:last-of-type {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  // fixed height to 300px
+  &.height-control {
+    .card-body {
+      max-height: 300px;
+      overflow: auto;
+    }
+  }
+
+  .border-right {
+    border-right: 1px solid $card-border-color;
+  }
+
+  .border-left {
+    border-left: 1px solid $card-border-color;
+  }
+
+  &.card-tabs {
+    &:not(.card-outline) {
+      & .card-header {
+        border-bottom: 0;
+
+        .nav-item {
+          &:first-child .nav-link {
+            margin-left: -1px;
+          }
+        }
+      }
+    }
+
+    &.card-outline {
+      .nav-item {
+        border-bottom: 0;
+
+        &:first-child .nav-link {
+          border-left: 0;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  &.card-outline-tabs {
+    border-top: 0;
+
+    .card-header {
+      .nav-item {
+        &:first-child .nav-link {
+          border-left: 0;
+          margin-left: 0;
+        }
+      }
+
+      a {
+        border-top: 3px solid transparent;
+
+        &:hover {
+          border-top: 3px solid $nav-tabs-border-color;
+        }
+
+        &.active {
+          &:hover {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+
+}
 
 // Maximized Card Body Scroll fix
 html.maximized-card {
