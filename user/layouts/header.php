@@ -1,4 +1,4 @@
-<header style="height:100%">
+<header>
     <nav class="navbar navbar-expand-sm navbar-dark px-5" style="background-color: #079992;">
         <a class="navbar-brand" href="#">Cs.Helper</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
