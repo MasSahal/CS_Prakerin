@@ -13,6 +13,7 @@ include('../koneksi.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="../admin/sweetalert2.min.css">
+    <link rel="stylesheet" href="assets/style.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../admin/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -39,153 +40,67 @@ include('../koneksi.php');
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <style>
-        *{
-            font-family: 'Nunito', sans-serif;
-        }
-        .hover:hover{
-            box-shadow: 0 0.8rem 1rem rgba(0, 0, 0, 0.25) !important;
-            }
-    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed bg-light">
     <?php include('layouts/header.php'); ?>
 
-    <!-- wrapper selamat datang -->
+    <!-- end wrapper form-->
     <div class="wrapper">
-        <div class="jumbotron jumbotron-fluid bg-dark text-white mb-0">
-            <div class="container">
-                <div class="row">
-                    <div class="col text-center">
-                        <h1 style="font-family: 'Nunito', sans-serif;"><b>Selamat Datang di Web Pelayanan Pengaduan</b></h1>
-                        <p class="lead"><b>Cs.helper</b> adalah layanan yang bertujuan untuk mengajukan pengaduan masalah.</p>
-                        <a href="#" class="btn btn-outline-light btn-md mt-2">Selengkapnya</a>
-                    </div>
+        <div class="jumbotron-fluid mb-0 p-5">
+            <div class="row justify-content-center mb-5">
+                <div class="col text-light">
+                    <h1 style="font-family: 'Nunito', sans-serif;" class=" text-center"><b>Selamat Datang di Web Pelayanan Pengaduan</b></h1>
+                    <p class="lead text-center"><b>Cs.helper</b> adalah layanan yang bertujuan untuk mengajukan pengaduan masalah.</p>
+                    <hr class="my-4">
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- wrapper selamat datang -->
-
-    <!-- wrapper kategori masalah -->
-    <div class="wrapper">
-        <div class="container-fluid p-5">
-            <div class="text-body my-5">
-                <h2 class="font-weight-bold text-center">Kategori Masalah</h2>
-            </div>
-            <div class="row"> 
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/milk.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark text-link">Milk Shake Yummy</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/cake.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Cake Dessert Coco</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/icecream.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Delicius Ice Cream</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/burger.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Delicius Big Burger</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/cake.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Cake Dessert Coco</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/milk.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark text-link">Milk Shake Yummy</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/burger.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Delicius Big Burger</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/icecream.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Delicius Ice Cream</a>
-                            </h4>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="container">
+                        <div class="card p-4 shadow">
+                            <form method="post">
+                                <div class="form-group">
+                                    <label for="nama">Nama<span style="color:rgb(190, 0, 0)">*</span></label>
+                                    <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukan nama" value="<?=$_SESSION['akun']['username_akun'];?>" aria-describedby="helpId">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email<span style="color:rgb(190, 0, 0)">*</span></label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="Masukan email" value="<?=$_SESSION['akun']['email_akun'];?>" aria-describedby="helpId">
+                                </div>
+                                <div class="form-group">
+                                    <label for="masalah">Masalah<span style="color:rgb(190, 0, 0)">*</span></label>
+                                    <textarea name="masalah" id="masalah" rows="7" class="form-control" placeholder="Masukan permasalahan"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kategori">Kategori<span style="color:rgb(190, 0, 0)">*</span></label>
+                                    <select name="kategori" id="kategori" class="form-control">
+                                        <option>--> Pilih Kategori Permasalahan<--</option>
+                                        <?php
+                                        $sql = mysqli_query($koneksi, "SELECT * FROM tb_kategori");
+                                        while ($data = mysqli_fetch_assoc($sql)) { ?>
+                                            <option value="<?= $data['kategori']; ?>"><?= $data['kategori']; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- wrapper kategori masalah -->
 
     <!-- wrapper about -->
-    <div class="wrapper" style="background-color:#d0cde1ff">
+    <div class="wrapper" id="about">
         <div class="container py-5">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 p-4">
                     <img src="img/cs.png" alt="" class="responsive" width="100%">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 pl-4">
-                    <h1 class="h2 font-weight-bold mb-2 my-3">About</h1>
-                    <p class="text-dark">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque optio similique dolorum voluptate suscipit ut, vitae corporis, laboriosam in, voluptatibus autem unde assumenda sed earum? Adipisci vero numquam facilis non.
+                    <h1 class="h2 font-weight-bold mb-2 my-3 text-light">About</h1>
+                    <p class="text-light">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque optio similique dolorum voluptate suscipit ut, vitae corporis, laboriosam in, voluptatibus autem unde assumenda sed earum? Adipisci vero numquam facilis non.
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore nihil fuga iure, velit, voluptates quam nam laboriosam itaque adipisci in obcaecati soluta ex! Sequi doloremque, recusandae consequatur dignissimos nisi alias?
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum dolores quasi quidem inventore explicabo numquam quae dolore officia accusamus nobis! Quam nesciunt at dicta deserunt delectus ipsum id a mollitia.
 
@@ -197,50 +112,6 @@ include('../koneksi.php');
         </div>
     </div>
     <!-- wrapper about -->
-
-
-    <div class="wrapper bg-gradient-cyan">
-        <div class="container">
-            <div class="card my-5 p-5">
-<!-- <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident autem exercitationem, error aliquid totam quaerat nemo molestiae deserunt numquam facilis neque eveniet? Ipsam iure temporibus amet ut labore tenetur consectetur.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur reprehenderit at commodi? In, neque doloremque corporis illum eos illo voluptates eius reiciendis nulla dolor nostrum? Voluptas harum consectetur tempore ullam.
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia rerum sunt placeat deserunt, est fugiat voluptatum enim? Quas magnam nostrum totam fugiat quam quo tempore. Ratione quam pariatur iste provident.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem minima odio dolorem repudiandae dolores, ducimus deserunt. Tenetur atque explicabo rem laudantium architecto ducimus nobis saepe natus laboriosam, id deserunt asperiores!
-                        </p> -->
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <ul class="list-group">
-                        <li class="list-group-item">A</li>
-                        <li class="list-group-item">A</li>
-                        <li class="list-group-item">A</li>
-                        <li class="list-group-item">A</li>
-                        <li class="list-group-item">A</li>
-                    </ul>
-                </div>
-                <div class="col-8">
-                    <?php
-                    if (isset($_GET['search'])) {
-                        $data = $_GET['search'];
-                        echo "anda mencari " . $data;
-                    }
-                    ?>
-                    
-                </div>
-            </div>
-
-            <!-- Content Wrapper. Contains page content -->
-
-            <!-- /.content-wrapper -->
-            
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
-        </div>
-    </div>
 
     <!-- wrapper footer -->
     <div class="wrapper">

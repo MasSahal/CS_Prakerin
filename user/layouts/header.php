@@ -1,3 +1,8 @@
+<?php
+    $id_profile = $_SESSION['akun']['id_akun'];
+    $sql = mysqli_query($koneksi, "SELECT * FROM tb_akun WHERE id_akun='$id_profile'");
+    $data = mysqli_fetch_assoc($sql);
+?>
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark px-5" style="background-color: #079992;">
         <a class="navbar-brand" href="#">Cs.Helper</a>
@@ -6,14 +11,14 @@
             
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pengajuan</a>
+                    <a class="nav-link" href="pengajuan.php">Pengajuan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Problem</a>
+                    <a class="nav-link" href="problem.php">Problem</a>
                 </li>
                     <?php
                     if (!isset($_SESSION['akun'])){ ?>
@@ -23,12 +28,13 @@
                         </li>
                     <?php }else{ ?>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hai, <?= $_SESSION['akun']['username_akun'];?></a>
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hai, <?=$data['username_akun'];?></a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                <a class="dropdown-item" href="#">Riwayat</a>
-                                <a class="dropdown-item" href="#">Pengaturan Akun</a>
+                                <a class="dropdown-item" href="riwayat.php">Riwayat</a>
+                                <a class="dropdown-item" href="akun_saya.php">Akun Saya</a>
+                                <a class="dropdown-item" href="about.php">About</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="logout.php">Logout</a>
                             </div>
                         </li>
                     <?php } ?>

@@ -1,0 +1,43 @@
+.jumbotron-fluid {
+    background-image: linear-gradient(to top, #434343 0%, black 100%);
+    color: (105, 36, 36);
+}
+
+.jumbotron-fluid h1,
+.jumbotron-fluid p {
+    text-shadow: 1px 2px 10px rgba(0, 0, 0, 0.4);
+}
+.card{
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+}
+hr{
+    background-color: #079992;
+    min-height: 5px;;
+    width: 100px;
+}
+#timeline{
+    background: -webkit-linear-gradient(to bottom, #ECE9E6 10%, #FFFFFF 90%); /* Chrome 10+, Saf5.1+ */
+    background:    -moz-linear-gradient(to bottom, #ECE9E6 10%, #FFFFFF 90%); /* FF3.6+ */
+    background:     -ms-linear-gradient(to bottom, #ECE9E6 10%, #FFFFFF 90%); /* IE10 */
+    background:      -o-linear-gradient(to bottom, #ECE9E6 10%, #FFFFFF 90%); /* Opera 11.10+ */
+    background:         linear-gradient(to bottom, #ECE9E6 10%, #FFFFFF 90%); /* W3C */
+        
+}
+#timeline .container{
+    color:wheat;
+}
+#about{
+    background: linear-gradient(to top, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898; 
+    background-blend-mode: multiply,multiply;
+}
+#about .container{
+    color:wheat;
+}
+#about_index{
+    background: linear-gradient(to top, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898; 
+    background-blend-mode: multiply,multiply;
+    color:wheat;

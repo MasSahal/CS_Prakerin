@@ -5,11 +5,11 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="?page=dashboard" class="nav-link">Home</a>
+        <a href="index.php" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="?page=logout" class="nav-link">Logout</a>
-      </li>
+        <a href="logout.php" class="nav-link">Logout</a>
+      </li> 
     </ul>
 
     <!-- SEARCH FORM -->

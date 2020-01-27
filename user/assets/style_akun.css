@@ -1,0 +1,32 @@
+#profile{
+    height:700px;
+}
+.jumbotron-fluid {
+    background-image: linear-gradient(to top, #434343 0%, black 100%);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: 0 -20px;
+    color: (105, 36, 36);
+}
+
+.jumbotron-fluid h1,
+.jumbotron-fluid p {
+    text-shadow: 1px 2px 10px rgba(0, 0, 0, 0.4);
+}
+.card{
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+}
+#akun hr{
+    background-color: #079992;
+    min-height: 5px;;
+    width: 100px;
+}
+#bg-user{
+    background: url('../img/bg-user.jpg') center center;
+    background-size:100%;
+    background-position: 0 -50px;
+}
