@@ -105,7 +105,7 @@ $profile = $_SESSION['akun']['email_akun'];
                                                         <td><?= $data['kategori']; ?></td>
                                                         <td><?= $data['subjek_kategori']; ?></td>
                                                         <td>
-                                                            <button type="button" data-toggle="modal" data-target="#ubahKategori<?php echo $data['id_kategori']; ?>" class="btn btn-sm btn-warning" title="Edit"><span class="fa fa-edit"></span></button>
+                                                            <button type="button" data-toggle="modal" data-target="#ubahKategori<?php echo $data['id_kategori']; ?>" class="btn btn-sm btn-warning" title="Edit"><span class="fa fa-edit" data-toggle="tooltip" data-placement="bottom"></span></button>
                                                             <!-- Modal -->
                                                             <div class="modal fade" id="ubahKategori<?= $data['id_kategori']; ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
@@ -127,6 +127,7 @@ $profile = $_SESSION['akun']['email_akun'];
                                                                                 <div class="form-group">
                                                                                     <label for="nama">Nama Kategori</label>
                                                                                     <input type="text" name="nama" id="nama" class="form-control" required value="<?= $data['kategori']; ?>" aria-describedby="helpId">
+                                                                                    <small>Maksimal 25 karakter</small>
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="subjek">Subjek Kategori</label>
@@ -141,7 +142,7 @@ $profile = $_SESSION['akun']['email_akun'];
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <a href="?page=hapus_kategori&id=<?= $data['id_kategori']; ?>" onclick="return confirm('Yakin ingin hapus kategori ini?')" class="btn btn-sm btn-danger" title="Hapus"><span class="fa fa-trash"></span></a>
+                                                            <a href="?page=hapus_kategori&id=<?= $data['id_kategori']; ?>" onclick="return confirm('Yakin ingin hapus kategori ini?')" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="bottom" title="Hapus"><span class="fa fa-trash"></span></a>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -174,6 +175,7 @@ $profile = $_SESSION['akun']['email_akun'];
                             <div class="form-group">
                                 <label for="nama">Nama Kategori</label>
                                 <input type="text" name="nama" id="nama" class="form-control" required placeholder="Nama Kategori" aria-describedby="helpId">
+                                <small>Maksimal 25 karakter</small>
                             </div>
                             <div class="form-group">
                                 <label for="subjek">Subjek Kategori</label>
@@ -192,20 +194,20 @@ $profile = $_SESSION['akun']['email_akun'];
 
         <!-- content-wrapper php -->
         <?php
-        if(isset($_GET['page'])){
+        if (isset($_GET['page'])) {
             $page = $_GET['page'];
-        }else{
+        } else {
             $page = "?";
         }
-        
+
 
         switch ($page) {
             case 'hapus_kategori':
                 include("proses/hapus_kategori.php");
                 break;
-            
+
             default:
-                echo"404 not found";
+                echo "404 not found";
                 break;
         }
         ?>
@@ -266,9 +268,16 @@ $profile = $_SESSION['akun']['email_akun'];
     <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="plugins/toastr/toastr.min.js"></script>
+    <!-- Popper jquery -->
+    <script src="plugins/popper/popper.min.js"></script>
     <!-- DataTables -->
     <script src="plugins/datatables/jquery.dataTables.js"></script>
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <script>
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
     <script>
         $(function() {
             $("#table1").DataTable();
@@ -282,12 +291,16 @@ if (isset($_POST['tambah'])) {
     $nama = $_POST['nama'];
     $subjek = $_POST['subjek'];
 
-    $add = $query = mysqli_query($koneksi, "INSERT INTO tb_kategori (kategori,subjek_kategori) VALUES ('$nama','$subjek')");
-    if ($add) {
-        echo "<script>Swal.fire('Selamat !','Kategori Berhasil di tambahkan!','success')</script>
-        <meta http-equiv='refresh' content='1;url=kategori.php'>";
-    } else {
-        echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal tambah kategori !'});</script>";
+    if (strlen($nama) <= 26) {
+        $add = $query = mysqli_query($koneksi, "INSERT INTO tb_kategori (kategori,subjek_kategori) VALUES ('$nama','$subjek')");
+        if ($add) {
+            echo "<script>Swal.fire('Selamat !','Kategori Berhasil di tambahkan!','success')</script>
+            <meta http-equiv='refresh' content='1;url=kategori.php'>";
+        } else {
+            echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal tambah kategori !'});</script>";
+        }
+    }else{
+        echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Karakter terlalu banyak !'});</script>";
     }
 }
 if (isset($_POST['ubah'])) {
@@ -295,14 +308,18 @@ if (isset($_POST['ubah'])) {
     $nama = $_POST['nama'];
     $subjek = $_POST['subjek'];
 
-    $edit = $query = mysqli_query($koneksi, "UPDATE tb_kategori SET kategori='$nama', subjek_kategori='$subjek' WHERE id_kategori='$id'");
-
-    if ($edit) {
-        echo "
-        <script>Swal.fire('Selamat !','Kategori Berhasil di ubah!','success')</script>
-        <meta http-equiv='refresh' content='1;url=kategori.php'>";
-    } else {
-        echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal ubah kategori !'});</script>";
+    if (strlen($nama) <= 26) {
+        $edit = $query = mysqli_query($koneksi, "UPDATE tb_kategori SET kategori='$nama', subjek_kategori='$subjek' WHERE id_kategori='$id'");
+    
+        if ($edit) {
+            echo "
+            <script>Swal.fire('Selamat !','Kategori Berhasil di ubah!','success')</script>
+            <meta http-equiv='refresh' content='1;url=kategori.php'>";
+        } else {
+            echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal ubah kategori !'});</script>";
+        }
+    }else{
+        echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Karakter terlalu banyak !'});</script>";
     }
 }
 ?>

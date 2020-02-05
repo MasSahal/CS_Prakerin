@@ -41,12 +41,7 @@ include('../koneksi.php');
     <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <style>
-        *{
-            font-family: 'Nunito', sans-serif;
-        }
-        .hover:hover{
-            box-shadow: 0 0.8rem 1rem rgba(0, 0, 0, 0.25) !important;
-            }
+
     </style>
 </head>
 
@@ -75,117 +70,44 @@ include('../koneksi.php');
             <div class="text-body my-5">
                 <h2 class="font-weight-bold text-center">Kategori Masalah</h2>
             </div>
-            <div class="row"> 
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/milk.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark text-link">Milk Shake Yummy</a>
-                            </h4>
+            <div class="row">
+                <?php
+                $sql = mysqli_query($koneksi, "SELECT * FROM tb_kategori");
+                while ($data = mysqli_fetch_assoc($sql)) {
+                ?>
+                    <div class="col-lg-3 col-md-4 col-sm-6 rounded">
+                        <div class="card card-outline card-secondary hover mb-4 m-2 collapsed-card">
+                            <div class="card-header">
+                                <h5 class="card-title"><?= $data['kategori']; ?></h5>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <p><?= $data['subjek_kategori']; ?></p>
+                            </div>
+                            <!-- /.card-body -->
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/cake.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Cake Dessert Coco</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/icecream.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Delicius Ice Cream</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/burger.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Delicius Big Burger</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/cake.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Cake Dessert Coco</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/milk.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark text-link">Milk Shake Yummy</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/burger.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Delicius Big Burger</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                    <div class="card shadow m-2 hover mb-4">
-                        <a href="#">
-                            <img src="img/icecream.png" class="responsive "alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <h4 class="card-title font-weight-bold">
-                                <a href="#" class="text-dark">Delicius Ice Cream</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
     </div>
     <!-- wrapper kategori masalah -->
 
     <!-- wrapper about -->
-    <div class="wrapper" style="background-color:#d0cde1ff"  id="about">
+    <div class="wrapper" style="background-color:#adb5bd" id="about">
         <div class="container py-5">
+            <h1 class="h2 font-weight-bold text-center mb-4x">About</h1>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 p-4">
                     <img src="img/cs.png" alt="" class="responsive" width="100%">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 pl-4">
-                    <h1 class="h2 font-weight-bold mb-2 my-3">About</h1>
                     <p class="text-dark">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque optio similique dolorum voluptate suscipit ut, vitae corporis, laboriosam in, voluptatibus autem unde assumenda sed earum? Adipisci vero numquam facilis non.
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore nihil fuga iure, velit, voluptates quam nam laboriosam itaque adipisci in obcaecati soluta ex! Sequi doloremque, recusandae consequatur dignissimos nisi alias?
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum dolores quasi quidem inventore explicabo numquam quae dolore officia accusamus nobis! Quam nesciunt at dicta deserunt delectus ipsum id a mollitia.
@@ -203,7 +125,7 @@ include('../koneksi.php');
     <div class="wrapper bg-gradient-cyan">
         <div class="container">
             <div class="card my-5 p-5">
-<!-- <p>
+                <!-- <p>
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident autem exercitationem, error aliquid totam quaerat nemo molestiae deserunt numquam facilis neque eveniet? Ipsam iure temporibus amet ut labore tenetur consectetur.
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur reprehenderit at commodi? In, neque doloremque corporis illum eos illo voluptates eius reiciendis nulla dolor nostrum? Voluptas harum consectetur tempore ullam.
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia rerum sunt placeat deserunt, est fugiat voluptatum enim? Quas magnam nostrum totam fugiat quam quo tempore. Ratione quam pariatur iste provident.
@@ -227,14 +149,14 @@ include('../koneksi.php');
                         echo "anda mencari " . $data;
                     }
                     ?>
-                    
+
                 </div>
             </div>
 
             <!-- Content Wrapper. Contains page content -->
 
             <!-- /.content-wrapper -->
-            
+
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
                 <!-- Control sidebar content goes here -->
@@ -242,7 +164,13 @@ include('../koneksi.php');
             <!-- /.control-sidebar -->
         </div>
     </div>
-
+    
+    <!-- back to top-->
+    <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up text-white"></i>
+    </a>
+    <!-- back to top-->
+    
     <!-- wrapper footer -->
     <div class="wrapper">
         <div class="container">

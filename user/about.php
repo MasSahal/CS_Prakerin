@@ -34,11 +34,16 @@ include('../koneksi.php');
     <div class="wrapper" id="about_index">
         <div class="container py-5">
             <div class="row">
+                <div class="col">
+                    <h1 class="h2 font-weight-bold mb-3 text-light text-center">About Cs Helper</h1>
+                    <hr class="mb-5 bg-white" >
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 p-4">
                     <img src="img/cs.png" alt="" class="responsive" width="100%">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 pl-4">
-                    <h1 class="h2 font-weight-bold mb-2 my-3 text-light">About</h1>
                     <p class="text-light">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque optio similique dolorum voluptate suscipit ut, vitae corporis, laboriosam in, voluptatibus autem unde assumenda sed earum? Adipisci vero numquam facilis non.
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore nihil fuga iure, velit, voluptates quam nam laboriosam itaque adipisci in obcaecati soluta ex! Sequi doloremque, recusandae consequatur dignissimos nisi alias?
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum dolores quasi quidem inventore explicabo numquam quae dolore officia accusamus nobis! Quam nesciunt at dicta deserunt delectus ipsum id a mollitia.
@@ -56,7 +61,7 @@ include('../koneksi.php');
     <div class="wrapper">
         <div class="container">
             <footer class="py-4 text-center border-top">
-                <strong>Copyright &copy; 2014-2019 <a href="http://massahalofficial.site">Mas Sahal</a>.</strong>
+                <strong>Copyright &copy; 2014 - <?= date('Y'); ?> <a href="index.php">CS Helper</a>.</strong>
                 All rights reserved.
                 <div class="float-right d-sm-inline-block">
                     <b>Version</b> 1.0

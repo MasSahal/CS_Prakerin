@@ -1,3 +1,18 @@
+*{
+    font-family: 'Nunito', sans-serif;
+}
+.hover{
+    background-color: #f8f9fa;
+}
+.hover:hover{
+    box-shadow: 0 0.8rem 1rem rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-1px);
+    -webkit-transform: translateY(-1px);
+    -moz-transform: translateY(-1px);
+    -ms-transform: translateY(-1px);
+    -o-transform: translateY(-1px);
+    background-color: white;
+}
 .jumbotron-fluid {
     background-image: linear-gradient(to top, #434343 0%, black 100%);
     color: (105, 36, 36);
@@ -20,16 +35,12 @@ hr{
     width: 100px;
 }
 #timeline{
-    background: -webkit-linear-gradient(to bottom, #ECE9E6 10%, #FFFFFF 90%); /* Chrome 10+, Saf5.1+ */
-    background:    -moz-linear-gradient(to bottom, #ECE9E6 10%, #FFFFFF 90%); /* FF3.6+ */
-    background:     -ms-linear-gradient(to bottom, #ECE9E6 10%, #FFFFFF 90%); /* IE10 */
-    background:      -o-linear-gradient(to bottom, #ECE9E6 10%, #FFFFFF 90%); /* Opera 11.10+ */
-    background:         linear-gradient(to bottom, #ECE9E6 10%, #FFFFFF 90%); /* W3C */
-        
+    background-color: #adb5bd;
 }
 #timeline .container{
     color:wheat;
 }
+
 #about{
     background: linear-gradient(to top, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898; 
     background-blend-mode: multiply,multiply;
@@ -41,3 +52,13 @@ hr{
     background: linear-gradient(to top, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898; 
     background-blend-mode: multiply,multiply;
     color:wheat;
+}
+/* #maps{
+    height:500px;
+    background-image: url('../img/indonesia.png') !important;
+    background-size: 100%;
+    background-attachment: scroll;
+} */
+.container-maps{
+    min-height: 100px;
+    margin: 50px;

@@ -1,3 +1,4 @@
+
 #profile{
     height:700px;
 }
@@ -29,4 +30,28 @@
     background: url('../img/bg-user.jpg') center center;
     background-size:100%;
     background-position: 0 -50px;
+}
+.fa{
+    color: #ebebeb;
+}
+.fa:hover{
+    color: black;
+    cursor: pointer;
+    animation-delay: 1s;
+}
+.form-group{
+    margin: 0;
+    padding: 0;
+}
+.form-control-sm{
+    outline: none;
+    border-style: solid black 1px;
+    background-color: #fff;
+    
+}
+#border-right{
+border-right: 2px #000;
+}
+h2 .fa{
+    color:transparent;
 }

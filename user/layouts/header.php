@@ -5,7 +5,7 @@
 ?>
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark px-5" style="background-color: #079992;">
-        <a class="navbar-brand" href="#">Cs.Helper</a>
+        <a class="navbar-brand" href="index.php">Cs.Helper</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">=</button>
             
@@ -33,7 +33,7 @@
                                 <a class="dropdown-item" href="riwayat.php">Riwayat</a>
                                 <a class="dropdown-item" href="akun_saya.php">Akun Saya</a>
                                 <a class="dropdown-item" href="about.php">About</a>
-                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-divider bg-dark"></div>
                                 <a class="dropdown-item" href="logout.php">Logout</a>
                             </div>
                         </li>

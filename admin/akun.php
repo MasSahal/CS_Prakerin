@@ -120,16 +120,16 @@ $profile = $_SESSION['akun']['email_akun'];
                             <td><?= $data['status_akun']; ?></td>
                             <td><?= $data['akses_akun']; ?></td>
                             <td>
-                              <a href="?page=edit_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-warning btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                              <a href="?page=hapus_akun&id=<?= $data['id_akun']; ?>" onclick="return confirm('Yakin Ingin Menghapus Ini?')" class="btn  btn-danger btn-sm" title="Hapus"><i class="fa fa-trash-alt"></i></a>
+                              <a href="?page=edit_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-warning btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa fa-edit"></i></a>
+                              <a href="?page=hapus_akun&id=<?= $data['id_akun']; ?>" onclick="return confirm('Yakin Ingin Menghapus Ini?')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa fa-trash-alt"></i></a>
 
                               <?php if ($data['status_akun'] == 'Tidak Aktif') { ?>
-                                <a href="?page=aktif_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-info btn-sm" title="Aktifkan"><i class="fa fa-lock-open"></i></a>
+                                <a href="?page=aktif_akun&id=<?= $data['id_akun']; ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Aktifkan"><i class="fa fa-lock-open"></i></a>
                               <?php } elseif ($data['status_akun'] == 'Aktif') { ?>
-                                <a href="?page=nonaktifkan_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-info btn-sm" title="Non-Aktifkan"><i class="fa fa-lock"></i></a>
+                                <a href="?page=nonaktifkan_akun&id=<?= $data['id_akun']; ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Non-Aktifkan"><i class="fa fa-lock"></i></a>
                               <?php } ?>
 
-                              <a href="?page=info_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-secondary btn-sm" title="Selengkapnya"><i class="fa fa-angle-right"></i></a>
+                              <a href="?page=info_akun&id=<?= $data['id_akun']; ?>" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Selengkapnya"><i class="fa fa-angle-right"></i></a>
                             </td>
                           </tr>
                         <?php } ?>
@@ -206,16 +206,16 @@ $profile = $_SESSION['akun']['email_akun'];
                             <td><?= $data['status_akun']; ?></td>
                             <td><?= $data['akses_akun']; ?></td>
                             <td>
-                              <a href="?page=edit_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-warning btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                              <a href="?page=hapus_akun&id=<?= $data['id_akun']; ?>" onclick="return confirm('Yakin Ingin Menghapus Ini?')" class="btn  btn-danger btn-sm" title="Hapus"><i class="fa fa-trash-alt"></i></a>
+                              <a href="?page=edit_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-warning btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa fa-edit"></i></a>
+                              <a href="?page=hapus_akun&id=<?= $data['id_akun']; ?>" onclick="return confirm('Yakin Ingin Menghapus Ini?')" class="btn  btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa fa-trash-alt"></i></a>
 
                               <?php if ($data['status_akun'] == 'Tidak Aktif') { ?>
-                                <a href="?page=aktif_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-info btn-sm" title="Aktifkan"><i class="fa fa-lock-open"></i></a>
+                                <a href="?page=aktif_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Aktifkan"><i class="fa fa-lock-open"></i></a>
                               <?php } elseif ($data['status_akun'] == 'Aktif') { ?>
-                                <a href="?page=nonaktifkan_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-info btn-sm" title="Non-Aktifkan"><i class="fa fa-lock"></i></a>
+                                <a href="?page=nonaktifkan_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Non-Aktifkan"><i class="fa fa-lock"></i></a>
                               <?php } ?>
 
-                              <a href="?page=info_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-secondary btn-sm" title="Selengkapnya"><i class="fa fa-angle-right"></i></a>
+                              <a href="?page=info_akun&id=<?= $data['id_akun']; ?>" class="btn  btn-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Selengkapnya"><i class="fa fa-angle-right"></i></a>
                             </td>
                           </tr>
                         <?php } ?>
@@ -458,6 +458,8 @@ $profile = $_SESSION['akun']['email_akun'];
   <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
   <!-- Toastr -->
   <script src="plugins/toastr/toastr.min.js"></script>
+  <!-- Popper jquery -->
+  <script src="plugins/popper/popper.min.js"></script>
   <!-- DataTables -->
   <script src="plugins/datatables/jquery.dataTables.js"></script>
   <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
@@ -474,6 +476,13 @@ $profile = $_SESSION['akun']['email_akun'];
         "autoWidth": false,
       });
     });
+  </script>
+      <script>
+  
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
   </script>
 </body>
 
