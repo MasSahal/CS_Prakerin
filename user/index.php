@@ -262,7 +262,7 @@ if (isset($_POST['pengaduan'])) {
     //jika $ekstensi dan $ekstensi_diterima bernilai sama
     if (in_array($ekstensi, $ekstensi_diterima) === true) {
 
-        //jika file kurang dari sama dengan 2088140 bytes atau 2 mb
+        //jika file kurang dari sama dengan 2088140 kilobytes atau 2 mb
         if ($size_file < 2088140) {
 
             //pindahkan file ke direktori file di admin

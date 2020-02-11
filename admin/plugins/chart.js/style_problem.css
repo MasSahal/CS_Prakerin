@@ -1,0 +1,15 @@
+body{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.sidebar{
+    width: 190px;
+    float: left;
+    position: fixed;
+    padding: 5px;
+}
+.content{
+float: left;
+margin-left: 200px;
+padding: 10px;
+}

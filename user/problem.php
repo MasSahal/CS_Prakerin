@@ -66,11 +66,13 @@ include('../koneksi.php');
                     <?php
                     $sql = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE jenis_pengaduan='Public'");
                     while ($data = mysqli_fetch_assoc($sql)) {
+                        $foto = mysqli_query($koneksi, "SELECT * FROM tb_akun WHERE id_akun='$data[id_akun]'");
+                        $foto_akun = mysqli_fetch_assoc($foto);
                     ?>
                     <div class="card card-widget mb-4">
                         <div class="card-header">
                             <div class="user-block">
-                                <img class="img-circle" src="img/milk.png" alt="User Image">
+                                <img class="img-circle" src="../admin/file/user/<?=$foto_akun['foto_akun'];?>" alt="User Image">
                                 <span class="username text-primary"><?=$data['nama_pengadu'];?></span>
                                 <span class="description"><?=time_elapsed_string($data['tanggal_pengaduan']);?></span>
                             </div>
@@ -88,7 +90,7 @@ include('../koneksi.php');
                         <!-- /.card-header -->
                         <!-- /.card-body -->
                         <div class="card-body">
-                            <img class="img-fluid pad" src="img/<?=$data['lampiran_pengaduan'];?>" alt="Photo">
+                            <img class="img-fluid pad" src="../admin/file/<?=$data['lampiran_pengaduan'];?>" alt="Photo">
                             <?php
                             $id_kat = $data['id_kategori'];
                             $kat = mysqli_query($koneksi, "SELECT * FROM tb_kategori WHERE id_kategori='$id_kat'");
@@ -126,8 +128,11 @@ include('../koneksi.php');
                                     </span><!-- /.username -->
                                     <form method="post">
                                     <?=$komen2['komentar'];?>
+                                    <?php if ($komen2['id_akun']==$_SESSION['akun']['id_akun']) { ?>
                                         <input type="hidden" name="id_komentar" value="<?=$komen2['id_komentar'];?>">
+                                        <input type="hidden" name="foto_komen" value="<?=$komen2['id_komentar'];?>">
                                         <button type="submit" name="hapus_komentar" onclick="return confirm('Yakin ingin menghapus komentar?');"class="float-right btn btn-tool pt-2" id="close"><i class="fa fa-times"></i></button>
+                                    <?php } ?>
                                     </form>
                                 </div>
                                 <!-- /.comment-text -->
@@ -138,7 +143,7 @@ include('../koneksi.php');
                         <!-- /.card-footer -->
                         <div class="card-footer">
                             <form method="post">
-                                <img class="img-fluid img-circle img-sm" src="img/milk.png" alt="Alt Text">
+                                <img class="img-fluid img-circle img-sm" src="../admin/file/user/<?=$_SESSION['akun']['foto_akun'];?>" alt="Alt Text">
                                 <!-- .img-push is used to add margin to elements next to floating images -->
                                 <div class="img-push">
                                 <div class="input-group">
@@ -156,7 +161,7 @@ include('../koneksi.php');
                     </div>
                     <?php } ?>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 px-4" style="position:left;float:left">
+                <div class="col-lg-4 col-md-4 col-sm-6 px-4" style="position:no-scroll;float:right">
                     <table class="table table-borderless">
                         <thead><tr><th  class="text-center">Filter</th></tr></thead>
                         <tr><td><a href="#" class="btn btn-block btn-default">Sub-menu</a></td></tr>

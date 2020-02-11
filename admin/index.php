@@ -2,10 +2,10 @@
 session_start();
 
 include('../koneksi.php');
-if(!isset($_SESSION['akun']['email_akun'])){
+if (!isset($_SESSION['akun']['email_akun'])) {
     header("../index.php");
-}else{
-$profile = $_SESSION['akun']['email_akun'];
+} else {
+    $profile = $_SESSION['akun']['email_akun'];
 }
 ?>
 <!DOCTYPE html>
@@ -23,27 +23,22 @@ $profile = $_SESSION['akun']['email_akun'];
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-    <!-- Toastr -->
-    <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- ChartJS -->
+    <script src="plugins/chart.js/"></script>
+    <script src="plugins/chart.js/Chart.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -156,10 +151,11 @@ $profile = $_SESSION['akun']['email_akun'];
                         </div>
                         <!-- ./col -->
                     </div>
+
                     <!-- /.row -->
                     <div class="row">
                         <div class="col">
-                            <div class="card card-danger">
+                            <div class="card card-info">
                                 <div class="card-header">
                                     <h3 class="card-title">Pie Chart</h3>
 
@@ -170,13 +166,179 @@ $profile = $_SESSION['akun']['email_akun'];
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <canvas id="myChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                    <center>
+                                        <h4 class="my-2">Data Grafik Riwayat Pengaduan</h4>
+                                        <div class="col-lg-6 col-md-6 col-sm-10">
+                                            <canvas id="myChart"></canvas>
+                                        </div>
+                                    </center>
+                                    <script>
+                                        var ctx = document.getElementById("myChart").getContext('2d');
+                                        var myChart = new Chart(ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: ["Terverifikasi", "Diproses", "Dalam Penanganan", "Selesai"],
+                                                datasets: [{
+                                                    label: 'Status',
+                                                    data: [
+                                                        <?php
+                                                        $sql_pending = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE status_pengaduan='Terverifikasi'");
+                                                        $pending = $sql_pending->num_rows;
+                                                        echo $pending;
+                                                        ?>,
+                                                        <?php
+                                                        $sql_pending = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE status_pengaduan='Diproses'");
+                                                        $pending = $sql_pending->num_rows;
+                                                        echo $pending;
+                                                        ?>,
+                                                        <?php
+                                                        $sql_pending = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE status_pengaduan='Dalam Penanganan'");
+                                                        $pending = $sql_pending->num_rows;
+                                                        echo $pending;
+                                                        ?>,
+                                                        <?php
+                                                        $sql_pending = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE status_pengaduan='Selesai'");
+                                                        $pending = $sql_pending->num_rows;
+                                                        echo $pending;
+                                                        ?>
+                                                    ],
+                                                    backgroundColor: [
+                                                        'rgb(255, 99, 132)',
+                                                        'rgb(54, 162, 235)',
+                                                        'rgb(255, 206, 86)',
+                                                        'rgb(153, 102, 255)'
+                                                    ],
+                                                    borderColor: [
+                                                        'rgba(255,99,132,1)',
+                                                        'rgba(54, 162, 235, 1)',
+                                                        'rgba(255, 206, 86, 1)',
+                                                        'rgba(153, 102, 255, 1)'
+                                                    ],
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    yAxes: [{
+                                                        ticks: {
+                                                            beginAtZero: true
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        });
+                                    </script>
                                 </div>
-                                <!-- /.card-body -->
                             </div>
                         </div>
                         <!-- /.card -->
                     </div>
+                    <!-- /.row -->
+
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">akun</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+
+                                    <div>
+                                        <div id="canvas-holder" style="width:40%">
+                                        Grafik
+                                            <canvas id="chart-area"></canvas>
+                                        </div>
+                                        <script>
+                                            var randomScalingFactor = function() {
+                                                return Math.round(Math.random() * 100);
+                                            };
+
+                                            var config = {
+                                                type: 'pie',
+                                                data: {
+                                                    datasets: [{
+                                                        data: [
+                                                            randomScalingFactor(),
+                                                            randomScalingFactor(),
+                                                            randomScalingFactor(),
+                                                            randomScalingFactor(),
+                                                            randomScalingFactor(),
+                                                        ],
+                                                        backgroundColor: [
+                                                            window.chartColors.red,
+                                                            window.chartColors.orange,
+                                                            window.chartColors.yellow,
+                                                            window.chartColors.green,
+                                                            window.chartColors.blue,
+                                                        ],
+                                                        label: 'Dataset 1'
+                                                    }],
+                                                    labels: [
+                                                        'Red',
+                                                        'Orange',
+                                                        'Yellow',
+                                                        'Green',
+                                                        'Blue'
+                                                    ]
+                                                },
+                                                options: {
+                                                    responsive: true
+                                                }
+                                            };
+
+                                            window.onload = function() {
+                                                var ctx = document.getElementById('chart-area').getContext('2d');
+                                                window.myPie = new Chart(ctx, config);
+                                            };
+
+                                            document.getElementById('randomizeData').addEventListener('click', function() {
+                                                config.data.datasets.forEach(function(dataset) {
+                                                    dataset.data = dataset.data.map(function() {
+                                                        return randomScalingFactor();
+                                                    });
+                                                });
+
+                                                window.myPie.update();
+                                            });
+
+                                            var colorNames = Object.keys(window.chartColors);
+                                            document.getElementById('addDataset').addEventListener('click', function() {
+                                                var newDataset = {
+                                                    backgroundColor: [],
+                                                    data: [],
+                                                    label: 'New dataset ' + config.data.datasets.length,
+                                                };
+
+                                                for (var index = 0; index < config.data.labels.length; ++index) {
+                                                    newDataset.data.push(randomScalingFactor());
+
+                                                    var colorName = colorNames[index % colorNames.length];
+                                                    var newColor = window.chartColors[colorName];
+                                                    newDataset.backgroundColor.push(newColor);
+                                                }
+
+                                                config.data.datasets.push(newDataset);
+                                                window.myPie.update();
+                                            });
+
+                                            document.getElementById('removeDataset').addEventListener('click', function() {
+                                                config.data.datasets.splice(0, 1);
+                                                window.myPie.update();
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.row -->
 
                     <!-- Main row -->
                     <div class="row">
@@ -252,22 +414,10 @@ $profile = $_SESSION['akun']['email_akun'];
     </script>
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="plugins/chart.js/Chart.min.js"></script>
     <!-- Sparkline -->
     <script src="plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="plugins/moment/moment.min.js"></script>
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="plugins/summernote/summernote-bs4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
@@ -276,27 +426,49 @@ $profile = $_SESSION['akun']['email_akun'];
     <script src="dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
-    <!-- Toastr -->
-    <script src="plugins/toastr/toastr.min.js"></script>
-    <!-- DataTables -->
-    <script src="plugins/datatables/jquery.dataTables.js"></script>
-    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-    <script>
-        $(function() {
-            $("#table1").DataTable();
-            $("#table2").DataTable();
-            $('#table3').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-            });
-        });
-    </script>
 </body>
 
 </html>
+<center>
+    <h4 class="my-2">Data Grafik Riwayat Pengaduan</h4>
+    <div class="col-lg-6 col-md-6 col-sm-10">
+        <canvas id="D"></canvas>
+    </div>
+</center>
+<script>
+    window.onload = function() {
+        var ctx = document.getElementById('D').getContext('2d');
+        window.myPie = new Chart(ctx, config);
+    };
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [
+                    <?php
+                    $sql_pending = $koneksi->query("SELECT * FROM tb_akun WHERE status_akun='Aktif'");
+                    $pending = $sql_pending->num_rows;
+                    echo $pending;
+                    ?>,
+                    <?php
+                    $sql_pending = $koneksi->query("SELECT * FROM tb_akun WHERE status_akun='Tidak Aktif'");
+                    $pending = $sql_pending->num_rows;
+                    echo $pending;
+                    ?>
+                ],
+                backgroundColor: [
+                    window.chartColors.yellow,
+                    window.chartColors.blue,
+                ],
+                label: 'Dataset 1'
+            }],
+            labels: [
+                'Aktif',
+                'Tidak Aktif',
+            ]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>

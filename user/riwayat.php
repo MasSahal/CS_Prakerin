@@ -62,7 +62,7 @@ include('../koneksi.php');
                         break;
                     
                     default:
-                        echo"";
+                        echo"   ";
                         break;
                 } 
                 
@@ -92,23 +92,25 @@ include('../koneksi.php');
                             $id_profile = $_SESSION['akun']['id_akun'];
                             $sql = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan INNER JOIN tb_kategori ON tb_pengaduan.id_kategori=tb_kategori.id_kategori WHERE id_akun='$id_profile'");
                             while ($data = mysqli_fetch_array($sql)) {
-                            ?>
-                                <tr>
-                                    <td><?= $no += 1; ?></td>
-                                    <td><?= $data['kategori']; ?></td>
-                                    <td>
-                                        <?= "Pukul " . date('H:i:s - D d, M Y', strtotime($data['tanggal_pengaduan'])); ?>
-                                    </td>
-                                    <td><?= $data['status_pengaduan']; ?></td>
-                                    <td>
-                                        <?php if ($data['status_pengaduan'] == "Terverifikasi") { ?>
-                                            <button type="submit" name="batalkan" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="bottom" title="Btalkan Pengaduan"><i class="fa fa-times"></i></button>
-                                        <?php }else{ ?>
-                                            <button type="submit" class="btn btn-sm btn-secondary disabled"><i class="fa fa-times"></i></button>
-                                        <?php } ?>
-                                            <a href="?page=detail&id=<?=$data['id_pengaduan'];?>" class="btn btn-sm btn-primary"><i class="fa fa-angle-right" data-toggle="tooltip" data-placement="bottom" title="Selengkapnya"></i></a>
-                                    </td>
-                                </tr>
+                            ?>  
+                                <form method="post">
+                                    <tr>
+                                        <td><?= $no += 1; ?><input type="hidden" name="id_pengaduan" value="<?=$data['id_pengaduan'];?>"></td>
+                                        <td><?= $data['kategori']; ?></td>
+                                        <td>
+                                            <?= "Pukul " . date('H:i:s - D d, M Y', strtotime($data['tanggal_pengaduan'])); ?>
+                                        </td>
+                                        <td><?= $data['status_pengaduan']; ?></td>
+                                        <td>
+                                            <?php if ($data['status_pengaduan'] == "Terverifikasi") { ?>
+                                                <button type="submit" name="batalkan" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="bottom" title="Batalkan Pengaduan"><i class="fa fa-times"></i></button>
+                                            <?php }else{ ?>
+                                                <button type="submit" class="btn btn-sm btn-secondary disabled"><i class="fa fa-times"></i></button>
+                                            <?php } ?>
+                                                <a href="?page=detail&id=<?=$data['id_pengaduan'];?>" class="btn btn-sm btn-primary"><i class="fa fa-angle-right" data-toggle="tooltip" data-placement="bottom" title="Selengkapnya"></i></a>
+                                        </td>
+                                    </tr>
+                                </form>
                             <?php } ?>
                         </tbody>
                     </table>
@@ -119,11 +121,11 @@ include('../koneksi.php');
                         <center>
                             <h4 class="my-2">Data Grafik Riwayat Pengaduan</h4>
                             <div class="col-lg-6 col-md-6 col-sm-10">
-                                <canvas id="myChart"></canvas>
+                                <canvas id="MyChart"></canvas>
                             </div>
                         </center>
                         <script>
-                            var ctx = document.getElementById("myChart").getContext('2d');
+                            var ctx = document.getElementById("MyChart").getContext('2d');
                             var myChart = new Chart(ctx, {
                                 type: 'bar',
                                 data: {
@@ -216,17 +218,6 @@ include('../koneksi.php');
     <script src="../admin/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="../admin/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
-    <script src="../admin/plugins/sparklines/sparkline.js"></script>
-    <script src="../admin/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="../admin/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="../admin/plugins/moment/moment.min.js"></script>
-    <script src="../admin/plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
     <script src="../admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- Summernote -->
     <script src="../admin/plugins/summernote/summernote-bs4.min.js"></script>
@@ -257,3 +248,22 @@ include('../koneksi.php');
 </body>
 
 </html>
+<?php
+if (isset($_POST['batalkan'])) {
+    $id_pembatalan = $_POST['id_pengaduan'];
+    
+    $sql = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE id_pengaduan='$id_pembatalan'");
+    $data = mysqli_num_rows($sql);
+
+    if ($data['status_pengaduan'] == 'Terverifikasi') {
+        
+        //langsung eksekusi
+        $batal = mysqli_query($koneksi, "DELETE FROM tb_pengaduan WHERE id_pengaduan='$id_pembatalan'");
+
+        //jika kondisi benar
+        if ($batal) {
+            echo "<script>Swal.fire('Good job!','Pembatalan Berhasil !','success')</script>";
+        }
+    }
+}
+?>

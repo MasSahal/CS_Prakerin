@@ -52,7 +52,7 @@ include('../koneksi.php');
                 <div class="widget-user-header text-white" id="bg-user">
                 </div>
                 <div class="widget-user-image">
-                    <img class="img-circle" src="img/milk.png" alt="User Avatar">
+                    <img class="img-circle" src="../admin/file/user/<?=$data['foto_akun'];?>" alt="User Avatar">
                 </div>
                 <div class="card-footer">
                     <div class="row justify-content-center">
