@@ -8,7 +8,7 @@ include('koneksi.php');
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Log in | Customer Service</title>
+  <title>Log in | Cs Helper</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -27,11 +27,14 @@ include('koneksi.php');
 
 <body class="hold-transition login-page">
   <div class="login-box">
-    <div class="login-logo">
-      <a href="../../index2.html"><b>Customer</b> Service</a>
+    <center class="image">
+      </center>
+      <div class="login-logo">
+        <!-- <img src="admin/file/logo-web.png" alt="logo-web.png" width="100"><br> -->
+      <a href="index.php"><img src="" alt=""><b>Cs</b> Helper</a>
     </div>
     <!-- /.login-logo -->
-    <div class="card">
+    <div class="card"  style="background-image: url('admin/file/logo-web.png'); background-attachment:no-repeat">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Silahkan login untuk mulai</p>
 
@@ -65,9 +68,6 @@ include('koneksi.php');
           <!-- /.col -->
           <div class="my-2">
             <button type="submit" name="login" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <div class="my-2">
-            <a href="user/" class="btn btn-block btn-outline-secondary">Login Later!</a>
           </div>
           <!-- /.col -->
         </form>

@@ -25,8 +25,6 @@ $profile = $_SESSION['akun']['email_akun'];
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <!-- Theme style -->
@@ -84,7 +82,7 @@ $profile = $_SESSION['akun']['email_akun'];
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped" id="table1">
+                                        <table class="table table-hover table-striped" id="table1">
                                             <thead class="text-light bg-info">
                                                 <tr>
                                                     <th>No</th>
@@ -127,7 +125,6 @@ $profile = $_SESSION['akun']['email_akun'];
                                                                                 <div class="form-group">
                                                                                     <label for="nama">Nama Kategori</label>
                                                                                     <input type="text" name="nama" id="nama" class="form-control" required value="<?= $data['kategori']; ?>" aria-describedby="helpId">
-                                                                                    <small>Maksimal 25 karakter</small>
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="subjek">Subjek Kategori</label>
@@ -154,64 +151,51 @@ $profile = $_SESSION['akun']['email_akun'];
                                     </div>
                                 </div>
                             </div>
+                            <!-- content-wrapper php -->
+                            <?php
+                            if (isset($_GET['page'])) {
+                                $page = $_GET['page'];
+
+                                if ($page == "hapus_kategori") {
+                                    include("proses/hapus_kategori.php");
+                                }
+                            }
+                            ?>
+                            <!-- /.content-wrapper php -->
+                            <!-- Modal -->
+                            <div class="modal fade" id="tambahKategori" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Tambah Kategori</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="#" method="post">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="nama">Nama Kategori</label>
+                                                    <input type="text" name="nama" id="nama" class="form-control" required placeholder="Nama Kategori" aria-describedby="helpId">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="subjek">Subjek Kategori</label>
+                                                    <textarea type="text" rows="4" name="subjek" id="subjek" class="form-control" placeholder="Subjek Kategori" aria-describedby="helpId"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <input type="submit" name="tambah" class="btn btn-primary" value="Tambah">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="tambahKategori" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Tambah Kategori</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="#" method="post">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="nama">Nama Kategori</label>
-                                <input type="text" name="nama" id="nama" class="form-control" required placeholder="Nama Kategori" aria-describedby="helpId">
-                                <small>Maksimal 25 karakter</small>
-                            </div>
-                            <div class="form-group">
-                                <label for="subjek">Subjek Kategori</label>
-                                <textarea type="text" rows="4" name="subjek" id="subjek" class="form-control" placeholder="Subjek Kategori" aria-describedby="helpId"></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input type="submit" name="tambah" class="btn btn-primary" value="Tambah">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- content-wrapper php -->
-        <?php
-        if (isset($_GET['page'])) {
-            $page = $_GET['page'];
-        } else {
-            $page = "?";
-        }
-
-
-        switch ($page) {
-            case 'hapus_kategori':
-                include("proses/hapus_kategori.php");
-                break;
-
-            default:
-                echo "404 not found";
-                break;
-        }
-        ?>
-        <!-- /.content-wrapper php -->
 
         <!-- /.content-wrapper -->
         <footer class="main-footer">
@@ -240,24 +224,10 @@ $profile = $_SESSION['akun']['email_akun'];
     </script>
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="plugins/chart.js/Chart.min.js"></script>
     <!-- Sparkline -->
     <script src="plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="plugins/moment/moment.min.js"></script>
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -291,7 +261,7 @@ if (isset($_POST['tambah'])) {
     $nama = $_POST['nama'];
     $subjek = $_POST['subjek'];
 
-    if (strlen($nama) <= 26) {
+    if (strlen($nama) <= 100) {
         $add = $query = mysqli_query($koneksi, "INSERT INTO tb_kategori (kategori,subjek_kategori) VALUES ('$nama','$subjek')");
         if ($add) {
             echo "<script>Swal.fire('Selamat !','Kategori Berhasil di tambahkan!','success')</script>
@@ -299,7 +269,7 @@ if (isset($_POST['tambah'])) {
         } else {
             echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal tambah kategori !'});</script>";
         }
-    }else{
+    } else {
         echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Karakter terlalu banyak !'});</script>";
     }
 }
@@ -308,9 +278,9 @@ if (isset($_POST['ubah'])) {
     $nama = $_POST['nama'];
     $subjek = $_POST['subjek'];
 
-    if (strlen($nama) <= 26) {
+    if (strlen($nama) <= 100) {
         $edit = $query = mysqli_query($koneksi, "UPDATE tb_kategori SET kategori='$nama', subjek_kategori='$subjek' WHERE id_kategori='$id'");
-    
+
         if ($edit) {
             echo "
             <script>Swal.fire('Selamat !','Kategori Berhasil di ubah!','success')</script>
@@ -318,7 +288,7 @@ if (isset($_POST['ubah'])) {
         } else {
             echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal ubah kategori !'});</script>";
         }
-    }else{
+    } else {
         echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Karakter terlalu banyak !'});</script>";
     }
 }

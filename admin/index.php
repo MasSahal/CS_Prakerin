@@ -14,7 +14,7 @@ if (!isset($_SESSION['akun']['email_akun'])) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Costumer Service</title>
+    <title>Dashboard | Admin</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -95,13 +95,13 @@ if (!isset($_SESSION['akun']['email_akun'])) {
                                 <div class="icon">
                                     <i class="ion ion-person"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="akun.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-success">
+                            <div class="small-box bg-danger">
                                 <div class="inner">
                                     <h3>
                                         <?php
@@ -116,7 +116,7 @@ if (!isset($_SESSION['akun']['email_akun'])) {
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="?page=kategori" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="kategori.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -124,24 +124,35 @@ if (!isset($_SESSION['akun']['email_akun'])) {
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>44</h3>
+                                    <h3>
+                                        <?php
+                                        $akun = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan");
+                                        $jml_akun = mysqli_num_rows($akun);
+                                        echo $jml_akun;
+                                        ?>
+                                    </h3>
 
-                                    <p>User Registrations</p>
+                                    <p>Pengaduan</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="pengaduan.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-danger">
+                            <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>65</h3>
+                                    <h3>
+                                        <?php
+                                        $akun = rand(1, 100);
+                                        echo $akun;
+                                        ?>
+                                    </h3>
 
-                                    <p>Unique Visitors</p>
+                                    <p>Visitors Online</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-pie-graph"></i>
@@ -151,13 +162,137 @@ if (!isset($_SESSION['akun']['email_akun'])) {
                         </div>
                         <!-- ./col -->
                     </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="card card-success">
+                                <div class="card-header">
+                                    <h3 class="card-title">Grafik Data Akun</h3>
 
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="akun"></canvas>
+                                    <script>
+                                        var ctx2 = document.getElementById("akun").getContext('2d');
+                                        var myChart2 = new Chart(ctx2, {
+                                            type: 'pie',
+                                            data: {
+                                                labels: ["User", "Admin"],
+                                                datasets: [{
+                                                    data: [
+                                                        <?php
+                                                        $sql_pending = mysqli_query($koneksi, "SELECT * FROM tb_akun WHERE akses_akun='user'");
+                                                        $pending = $sql_pending->num_rows;
+                                                        echo $pending;
+                                                        ?>,
+                                                        <?php
+                                                        $sql_pending = mysqli_query($koneksi, "SELECT * FROM tb_akun WHERE akses_akun='admin'");
+                                                        $pending = $sql_pending->num_rows;
+                                                        echo $pending;
+                                                        ?>
+                                                    ],
+                                                    backgroundColor: [
+                                                        '#61d4b3',
+                                                        '#fdd365'
+                                                    ],
+                                                    borderColor: [
+                                                        '#61d4b3',
+                                                        '#fdd365'
+                                                    ],
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    ticks: {
+                                                        beginAtZero: false
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">Grafik Data Pengaduan</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="akun2"></canvas>
+                                    <script>
+                                        var ctx3 = document.getElementById("akun2").getContext('2d');
+                                        var myChart3 = new Chart(ctx3, {
+                                            type: 'doughnut',
+                                            data: {
+                                                labels: ["Terverifikasi", "Diproses", "Dalam Penanganan", "Selesai"],
+                                                datasets: [{
+                                                    data: [
+                                                        <?php
+                                                        $sql_pending1 = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE status_pengaduan='Terverifikasi'");
+                                                        $pending1 = $sql_pending1->num_rows;
+                                                        echo $pending1;
+                                                        ?>,
+                                                        <?php
+                                                        $sql_pending2 = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE status_pengaduan='Diproses'");
+                                                        $pending2 = $sql_pending2->num_rows;
+                                                        echo $pending2;
+                                                        ?>,
+                                                        <?php
+                                                        $sql_pending3 = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE status_pengaduan='Dalam Penanganan'");
+                                                        $pending3 = $sql_pending3->num_rows;
+                                                        echo $pending3;
+                                                        ?>,
+                                                        <?php
+                                                        $sql_pending4 = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE status_pengaduan='Selesai'");
+                                                        $pending4 = $sql_pending4->num_rows;
+                                                        echo $pending4;
+                                                        ?>
+                                                    ],
+                                                    backgroundColor: [
+                                                        '#eb7070',
+                                                        '#fec771',
+                                                        '#64e291',
+                                                        '#e6e56c'
+                                                    ],
+                                                    borderColor: [
+                                                        '#eb7070',
+                                                        '#fec771',
+                                                        '#64e291',
+                                                        '#e6e56c'
+                                                    ],
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    ticks: {
+                                                        beginAtZero: false
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- /.row -->
                     <div class="row">
                         <div class="col">
-                            <div class="card card-info">
+                            <div class="card card-secondary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Pie Chart</h3>
 
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -168,7 +303,7 @@ if (!isset($_SESSION['akun']['email_akun'])) {
                                 <div class="card-body">
                                     <center>
                                         <h4 class="my-2">Data Grafik Riwayat Pengaduan</h4>
-                                        <div class="col-lg-6 col-md-6 col-sm-10">
+                                        <div class="col-lg-8 col-md-8 col-sm-10">
                                             <canvas id="myChart"></canvas>
                                         </div>
                                     </center>
@@ -228,111 +363,6 @@ if (!isset($_SESSION['akun']['email_akun'])) {
                                             }
                                         });
                                     </script>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.row -->
-
-                    <!-- /.row -->
-                    <div class="row">
-                        <div class="col">
-                            <div class="card card-info">
-                                <div class="card-header">
-                                    <h3 class="card-title">akun</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-
-                                    <div>
-                                        <div id="canvas-holder" style="width:40%">
-                                        Grafik
-                                            <canvas id="chart-area"></canvas>
-                                        </div>
-                                        <script>
-                                            var randomScalingFactor = function() {
-                                                return Math.round(Math.random() * 100);
-                                            };
-
-                                            var config = {
-                                                type: 'pie',
-                                                data: {
-                                                    datasets: [{
-                                                        data: [
-                                                            randomScalingFactor(),
-                                                            randomScalingFactor(),
-                                                            randomScalingFactor(),
-                                                            randomScalingFactor(),
-                                                            randomScalingFactor(),
-                                                        ],
-                                                        backgroundColor: [
-                                                            window.chartColors.red,
-                                                            window.chartColors.orange,
-                                                            window.chartColors.yellow,
-                                                            window.chartColors.green,
-                                                            window.chartColors.blue,
-                                                        ],
-                                                        label: 'Dataset 1'
-                                                    }],
-                                                    labels: [
-                                                        'Red',
-                                                        'Orange',
-                                                        'Yellow',
-                                                        'Green',
-                                                        'Blue'
-                                                    ]
-                                                },
-                                                options: {
-                                                    responsive: true
-                                                }
-                                            };
-
-                                            window.onload = function() {
-                                                var ctx = document.getElementById('chart-area').getContext('2d');
-                                                window.myPie = new Chart(ctx, config);
-                                            };
-
-                                            document.getElementById('randomizeData').addEventListener('click', function() {
-                                                config.data.datasets.forEach(function(dataset) {
-                                                    dataset.data = dataset.data.map(function() {
-                                                        return randomScalingFactor();
-                                                    });
-                                                });
-
-                                                window.myPie.update();
-                                            });
-
-                                            var colorNames = Object.keys(window.chartColors);
-                                            document.getElementById('addDataset').addEventListener('click', function() {
-                                                var newDataset = {
-                                                    backgroundColor: [],
-                                                    data: [],
-                                                    label: 'New dataset ' + config.data.datasets.length,
-                                                };
-
-                                                for (var index = 0; index < config.data.labels.length; ++index) {
-                                                    newDataset.data.push(randomScalingFactor());
-
-                                                    var colorName = colorNames[index % colorNames.length];
-                                                    var newColor = window.chartColors[colorName];
-                                                    newDataset.backgroundColor.push(newColor);
-                                                }
-
-                                                config.data.datasets.push(newDataset);
-                                                window.myPie.update();
-                                            });
-
-                                            document.getElementById('removeDataset').addEventListener('click', function() {
-                                                config.data.datasets.splice(0, 1);
-                                                window.myPie.update();
-                                            });
-                                        </script>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -429,46 +459,3 @@ if (!isset($_SESSION['akun']['email_akun'])) {
 </body>
 
 </html>
-<center>
-    <h4 class="my-2">Data Grafik Riwayat Pengaduan</h4>
-    <div class="col-lg-6 col-md-6 col-sm-10">
-        <canvas id="D"></canvas>
-    </div>
-</center>
-<script>
-    window.onload = function() {
-        var ctx = document.getElementById('D').getContext('2d');
-        window.myPie = new Chart(ctx, config);
-    };
-    var myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            datasets: [{
-                data: [
-                    <?php
-                    $sql_pending = $koneksi->query("SELECT * FROM tb_akun WHERE status_akun='Aktif'");
-                    $pending = $sql_pending->num_rows;
-                    echo $pending;
-                    ?>,
-                    <?php
-                    $sql_pending = $koneksi->query("SELECT * FROM tb_akun WHERE status_akun='Tidak Aktif'");
-                    $pending = $sql_pending->num_rows;
-                    echo $pending;
-                    ?>
-                ],
-                backgroundColor: [
-                    window.chartColors.yellow,
-                    window.chartColors.blue,
-                ],
-                label: 'Dataset 1'
-            }],
-            labels: [
-                'Aktif',
-                'Tidak Aktif',
-            ]
-        },
-        options: {
-            responsive: true
-        }
-    });
-</script>

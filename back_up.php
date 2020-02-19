@@ -90,11 +90,7 @@ include('../koneksi.php');
                         <!-- /.card-header -->
                         <!-- /.card-body -->
                         <div class="card-body">
-                            <div class="bg-dark">
-                                <center>
-                                    <img class="img-fluid pad" src="../admin/file/<?=$data['lampiran_pengaduan'];?>" alt="Photo">
-                                </center>
-                            </div>
+                            <img class="img-fluid pad" src="../admin/file/<?=$data['lampiran_pengaduan'];?>" alt="Photo">
                             <?php
                             $id_kat = $data['id_kategori'];
                             $kat = mysqli_query($koneksi, "SELECT * FROM tb_kategori WHERE id_kategori='$id_kat'");
@@ -103,7 +99,65 @@ include('../koneksi.php');
                             }
                             ?>
                             <p><?=$data['deskripsi_pengaduan'];?></p>
-                        </div>                        
+                            <?php
+                            $id_pengaduan = $data['id_pengaduan'];
+                            $komen = mysqli_query($koneksi,"SELECT * FROM tb_komentar WHERE id_pengaduan='$id_pengaduan'");
+                            ?>
+                            <form method="post">
+                                <input type="hidden" name="id_pengaduan" value="<?=$data['id_pengaduan'];?>">
+                                <?php if (isset($_POST['like'])) { ?>
+                                    <button type="submit" name="dislike" class="btn btn-primary btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
+                                <?php }else{ ?>
+                                    <button type="submit" name="like" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
+                                <?php } ?>
+                                <span class="float-right text-muted"><?=mysqli_num_rows($komen);?> Komentar</span>
+                            </form>
+                        </div>
+                        <?php
+                        while ($komen2 = mysqli_fetch_assoc($komen)) {
+                        ?>
+                        <div class="card-footer card-comments">
+                            <div class="card-comment">
+                                <!-- User image -->
+                                <img class="img-circle img-sm" src="img/milk.png" alt="User Image">
+
+                                <div class="comment-text">
+                                    <span class="username text-info">
+                                        <?=$komen2['username_komentar'];?>
+                                        <span class="text-muted float-right"><?=time_elapsed_string($komen2['tanggal_komentar']);?></span>
+                                    </span><!-- /.username -->
+                                    <form method="post">
+                                    <?=$komen2['komentar'];?>
+                                    <?php if ($komen2['id_akun']==$_SESSION['akun']['id_akun']) { ?>
+                                        <input type="hidden" name="id_komentar" value="<?=$komen2['id_komentar'];?>">
+                                        <input type="hidden" name="foto_komen" value="<?=$komen2['id_komentar'];?>">
+                                        <button type="submit" name="hapus_komentar" onclick="return confirm('Yakin ingin menghapus komentar?');"class="float-right btn btn-tool pt-2" id="close"><i class="fa fa-times"></i></button>
+                                    <?php } ?>
+                                    </form>
+                                </div>
+                                <!-- /.comment-text -->
+                            </div>
+                        </div>
+                        <hr style="margin:0">
+                        <?php } ?>
+                        <!-- /.card-footer -->
+                        <div class="card-footer">
+                            <form method="post">
+                                <img class="img-fluid img-circle img-sm" src="../admin/file/user/<?=$_SESSION['akun']['foto_akun'];?>" alt="Alt Text">
+                                <!-- .img-push is used to add margin to elements next to floating images -->
+                                <div class="img-push">
+                                <div class="input-group">
+                                    <input type="hidden" name="id_pengaduan" value="<?=$data['id_pengaduan'];?>">
+                                    <input type="text" name="message" required placeholder="Masukan komentar ..." class="form-control">
+                                    <span class="input-group-append">
+                                    <button type="submit" name="komen" class="btn btn-primary">Kirim</button>
+                                    </span>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <!-- /.card-footer -->
+                        
                     </div>
                     <?php } ?>
                 </div>

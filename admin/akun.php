@@ -94,7 +94,7 @@ $profile = $_SESSION['akun']['email_akun'];
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped" id="table1">
+                    <table class="table table-hover table-striped" id="table1">
                       <thead class="text-light bg-info">
                         <tr>
                           <th>No</th>
@@ -161,7 +161,7 @@ $profile = $_SESSION['akun']['email_akun'];
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
                 <li class="breadcrumb-item active">Akun Terdaftar</li>
               </ol>
             </div>
@@ -180,7 +180,7 @@ $profile = $_SESSION['akun']['email_akun'];
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped" id="table1">
+                    <table class="table table-hover table-striped" id="table1">
                       <thead class="text-light bg-info">
                         <tr>
                           <th>No</th>
@@ -234,6 +234,13 @@ $profile = $_SESSION['akun']['email_akun'];
       <!-- /.content -->
 
       <!-- Modal Tambah Akun-->
+    
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Modal Tambah Akun-->
+    <?php } ?>
+
     <div class="modal fade" id="tambahakun" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -316,93 +323,7 @@ $profile = $_SESSION['akun']['email_akun'];
         </div>
       </div>
     </div>
-    </div>
-    <!-- /.content-wrapper -->
 
-    <!-- Modal Tambah Akun-->
-    <div class="modal fade" id="tambahakun" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Tambah Akun</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <form method="post">
-            <div class="modal-body">
-              <div class="container-fluid">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" name="username" required placeholder="Username">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-user-alt"></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-group mb-3">
-                  <input type="email" class="form-control" name="email" required placeholder="Email">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-envelope"></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-group mb-3">
-                  <input type="number" class="form-control" name="telepon" required placeholder="No Hp">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-phone"></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-group mb-3">
-                  <input type="password" class="form-control" name="password" required placeholder="Password">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-key"></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-group mb-3">
-                  <input type="password" class="form-control" name="password2" required placeholder="Retype password">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-key"></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-group mb-3">
-                  <textarea type="text" class="form-control pr-sm-1" name="alamat" id="alamat" required placeholder="Alamat"></textarea>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-briefcase"></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-group mb-3">
-                  <select class="form-control" name="akses" required>
-                      <option value="">-- Akses Akun --</option>
-                      <option value="user">User</option>
-                      <option value="admin">Admin</option>
-                  </select>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fa fa-arrow-circle-down"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-              <button type="submit" name="tambahuser" class="btn btn-primary btn-sm">Tambah</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <?php } ?>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
       <strong>Copyright &copy; 2014-2019 <a href="http://massahalofficial.site">Mas Sahal</a>.</strong>
