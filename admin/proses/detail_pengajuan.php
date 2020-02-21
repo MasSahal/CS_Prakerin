@@ -39,7 +39,7 @@ $jml_balasan = mysqli_num_rows($sql_4);
 </section>
 <div class="content">
     <div class="col">
-        <div class="card card-widget mb-3">
+        <div class="card card-widget">
             <div class="card-header">
                 <div class="user-block">
                     <img class="img-circle" src="../admin/file/user/<?= $akun['foto_akun']; ?>" alt="User Image">
@@ -100,26 +100,28 @@ $jml_balasan = mysqli_num_rows($sql_4);
                 <hr style="margin:0">
             <?php } ?>
             <!-- /.card-footer -->
-            <div class="card-footer">
-                <form method="post">
-                    <img class="img-fluid img-circle img-sm" src="../admin/file/user/<?= $_SESSION['akun']['foto_akun']; ?>" alt="Alt Text">
-                    <!-- .img-push is used to add margin to elements next to floating images -->
-                    <div class="img-push">
-                        <div class="form-group">
-                            <label for="balas" class="text-primary h5"><?=$_SESSION['akun']['username_akun'];?></label>
-                            <textarea name="balas" id="balas" rows="5" class="form-control"></textarea>
-                            <div class=" my-3 float-right">
-                                <input type="hidden" name="id_pengaduan" value="<?=$data['id_pengaduan'];?>">
-                                <a href="problems_ver.php" class="btn btn-md btn-secondary mx-1"> Kembali </a>
-                                <button type="submit" name="balasan" class="btn btn-primary btn-md"> Kirim Balasan </button>
+            <?php if ($data['status_pengaduan']!=="Selesai") { ?>
+                <div class="card-footer">
+                    <form method="post">
+                        <img class="img-fluid img-circle img-sm" src="../admin/file/user/<?= $_SESSION['akun']['foto_akun']; ?>" alt="Alt Text">
+                        <!-- .img-push is used to add margin to elements next to floating images -->
+                        <div class="img-push">
+                            <div class="form-group">
+                                <label for="balas" class="text-primary h5"><?=$_SESSION['akun']['username_akun'];?></label>
+                                <textarea name="balas" id="balas" rows="5" class="form-control"></textarea>
+                                <div class=" my-3 float-right">
+                                    <input type="hidden" name="id_pengaduan" value="<?=$data['id_pengaduan'];?>">
+                                    <a href="problems_ver.php" class="btn btn-md btn-secondary mx-1"> Kembali </a>
+                                    <button type="submit" name="balasan" class="btn btn-primary btn-md"> Kirim Balasan </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            <!-- /.card-footer -->
+                    </form>
+                </div>
+            <?php } ?>
         </div>
     </div>
+    <div style="height:20px"></div>
 </div>
 <?php
 if (isset($_POST['balasan'])) {

@@ -35,8 +35,9 @@ include('../koneksi.php');
     <link rel="stylesheet" href="../admin/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="../admin/plugins/summernote/summernote-bs4.css">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Font Style -->
+    <link rel="stylesheet" href="../admin/fonts/font.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="assets/dist/chart.js"></script>
     <script src="assets/dist/chart.min.js"></script>

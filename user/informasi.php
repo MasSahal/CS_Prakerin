@@ -37,7 +37,8 @@ include('../koneksi.php');
     <link rel="stylesheet" href="../admin/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="../admin/plugins/summernote/summernote-bs4.css">
-    <!-- Google Font -->
+    <!-- Font Style -->
+    <link rel="stylesheet" href="../admin/fonts/font.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <style>
@@ -47,38 +48,70 @@ include('../koneksi.php');
 
 <body class="hold-transition sidebar-mini layout-fixed bg-light">
     <?php include('layouts/header.php'); ?>
-
-    <!-- wrapper selamat datang -->
-    <div class="wrapper">
-        <div class="jumbotron jumbotron-fluid text-light mb-0">
-            <div class="container">
-                <div class="row">
-                    <div class="col text-center">
-                        <h1 style="font-family: 'Nunito', sans-serif;"><b>Selamat Datang di Web Pelayanan Pengaduan</b></h1>
-                        <p class="lead"><b>Cs.helper</b> adalah layanan yang bertujuan untuk mengajukan pengaduan masalah.</p>
-                        <a href="#about" class="btn btn-outline-light btn-md mt-2">Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- wrapper selamat datang -->
-
+        
     <!-- wrapper kategori masalah -->
     <div class="wrapper">
-        <div class="container-fluid p-5">
-            <div class="text-body my-5">
-                <h2 class="font-weight-bold text-center">Kategori Masalah</h2>
+        <div class="container p-5">
+            <div class="col text-center mb-5">
+                <h1 style="font-family: 'Nunito', sans-serif;"><b>Mading Informasi Terkini</b></h1>
             </div>
             <div class="row">
-                <?php
-                $sql = mysqli_query($koneksi, "SELECT * FROM tb_kategori");
-                while ($data = mysqli_fetch_assoc($sql)) {
-                ?>
-                    <div class="col-lg-3 col-md-4 col-sm-6 rounded">
-                        <div class="card card-outline card-secondary hover mb-4 m-2 collapsed-card">
+                <div class="col-8">
+                    <?php
+                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_informasi ORDER BY tanggal_info DESC");
+                    while ($data = mysqli_fetch_assoc($sql)) {
+                        $sql2 = mysqli_query($koneksi, "SELECT * FROM tb_akun WHERE id_akun='$data[id_akun]'");
+                        $data2 = mysqli_fetch_assoc($sql2);
+                    ?>
+                        <div class="card <?php if($data['jenis_info']=='Penting'){ echo 'card-warning';} else if($data['jenis_info']=='Darurat'){ echo 'card-danger';}else{echo'card-secondary';}?> card-outline card-info mb-4">
                             <div class="card-header">
-                                <h5 class="card-title"><?= $data['kategori']; ?></h5>
+                                <div class="user-block">
+                                    <img class="img-circle" src="../admin/file/user/<?= $data2['foto_akun']; ?>" alt="User Image">
+                                    <span class="username text-primary"><?= $data2['username_akun']; ?></span>
+                                    <span class="description"><?php
+                                        if ($data['status_info'] == 'Diperbarui') {
+                                            echo $data['status_info'] . " - ";
+                                        }
+                                        echo time_elapsed_string($data['tanggal_info']);
+                                        ?></span>
+                                </div>
+                                <!-- /.user-block -->
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Mark as read">
+                                        <i class="far fa-circle"></i></button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+                            <div class="card-body p-4">
+                                <?= $data['info']; ?>
+                            </div>
+                            <?php if ($data['jenis_info'] == 'Penting') { ?>
+                                <div class="card-footer">
+                                    <span class="text-warning font-weight-bold">Informasi Penting !</span>
+                                </div>
+                            <?php } elseif ($data['jenis_info'] == 'Darurat') { ?>
+                                <div class="card-footer">
+                                    <span class="text-danger font-weight-bold">Informasi Darurat !</span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                </div>
+                <div class="col-4">
+                    <div class="text-body mb-5 mt-2">
+                        <h2 class="font-weight-bold text-center text-black-50">Kategori Masalah</h2>
+                    </div>
+                    <?php
+                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_kategori");
+                    while ($data = mysqli_fetch_assoc($sql)) {
+                    ?>
+                        <div class="card card-outline card-success hover mb-4 m-2 collapsed-card">
+                            <div class="card-header">
+                                <h5 class="card-title font-weight-bold text-black-50"><?= $data['kategori']; ?></h5>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-plus"></i>
@@ -92,85 +125,65 @@ include('../koneksi.php');
                             </div>
                             <!-- /.card-body -->
                         </div>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </div>
     <!-- wrapper kategori masalah -->
 
     <!-- wrapper about -->
-    <div class="wrapper" style="background-color:#adb5bd" id="about">
-        <div class="container py-5">
-            <h1 class="h2 font-weight-bold text-center mb-4x">About</h1>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 p-4">
-                    <img src="img/cs.png" alt="" class="responsive" width="100%">
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 pl-4">
-                    <p class="text-dark">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque optio similique dolorum voluptate suscipit ut, vitae corporis, laboriosam in, voluptatibus autem unde assumenda sed earum? Adipisci vero numquam facilis non.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore nihil fuga iure, velit, voluptates quam nam laboriosam itaque adipisci in obcaecati soluta ex! Sequi doloremque, recusandae consequatur dignissimos nisi alias?
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum dolores quasi quidem inventore explicabo numquam quae dolore officia accusamus nobis! Quam nesciunt at dicta deserunt delectus ipsum id a mollitia.
+    <div class="wrapper bg-gradient-light">
 
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, placeat modi? Error porro, inventore totam veniam in tempora, sapiente nostrum nisi aspernatur et quae? Quam iure cumque quidem officiis repellat!
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, consequatur! Soluta, aliquid corrupti nihil repellendus doloribus eaque et quos ad voluptatibus harum cupiditate fuga reiciendis, accusantium obcaecati sint amet suscipit.
-                    </p>
-                </div>
-            </div>
-        </div>
     </div>
     <!-- wrapper about -->
+    <?php
+    function time_elapsed_string($datetime, $full = false)
+        {
+            date_default_timezone_set('ASIA/JAKARTA');
+            $now = new DateTime;
+            $ago = new DateTime($datetime);
+            $diff = $now->diff($ago);
 
+            $diff->w = floor($diff->d / 7);
+            $diff->d -= $diff->w * 7;
 
-    <div class="wrapper bg-gradient-cyan">
-        <div class="container">
-            <div class="card my-5 p-5">
-                <!-- <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident autem exercitationem, error aliquid totam quaerat nemo molestiae deserunt numquam facilis neque eveniet? Ipsam iure temporibus amet ut labore tenetur consectetur.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur reprehenderit at commodi? In, neque doloremque corporis illum eos illo voluptates eius reiciendis nulla dolor nostrum? Voluptas harum consectetur tempore ullam.
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia rerum sunt placeat deserunt, est fugiat voluptatum enim? Quas magnam nostrum totam fugiat quam quo tempore. Ratione quam pariatur iste provident.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem minima odio dolorem repudiandae dolores, ducimus deserunt. Tenetur atque explicabo rem laudantium architecto ducimus nobis saepe natus laboriosam, id deserunt asperiores!
-                        </p> -->
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <ul class="list-group">
-                        <li class="list-group-item">A</li>
-                        <li class="list-group-item">A</li>
-                        <li class="list-group-item">A</li>
-                        <li class="list-group-item">A</li>
-                        <li class="list-group-item">A</li>
-                    </ul>
-                </div>
-                <div class="col-8">
-                    <?php
-                    if (isset($_GET['search'])) {
-                        $data = $_GET['search'];
-                        echo "anda mencari " . $data;
-                    }
-                    ?>
+            $string = array(
+                'y' => 'Tahun',
+                'm' => 'Bulan',
+                'w' => 'Minggu',
+                'd' => 'Hari',
+                'h' => 'Jam',
+                'i' => 'Menit',
+                's' => 'Detik',
+            );
+            foreach ($string as $k => &$v) {
+                if ($diff->$k) {
+                    $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? ' yang' : ' yang');
+                } else {
+                    unset($string[$k]);
+                }
+            }
 
-                </div>
-            </div>
+            if (!$full) $string = array_slice($string, 0, 1);
+            return $string ? implode(', ', $string) . ' lalu' : 'baru saja';
+        }
+    ?>
 
-            <!-- Content Wrapper. Contains page content -->
-
-            <!-- /.content-wrapper -->
-
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
-        </div>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     </div>
-    
+    </div>
+
     <!-- back to top-->
     <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
         <i class="fas fa-chevron-up text-white"></i>
     </a>
     <!-- back to top-->
-    
+
     <!-- wrapper footer -->
     <div class="wrapper">
         <div class="container">

@@ -15,7 +15,7 @@
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="pengajuan.php">Pengajuan</a>
+                    <a class="nav-link" href="informasi.php">Informasi</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="problem.php">Problem</a>

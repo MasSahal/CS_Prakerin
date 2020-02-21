@@ -14,7 +14,6 @@ $profile = $_SESSION['akun']['email_akun'];
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="sweetalert2.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -37,8 +36,9 @@ $profile = $_SESSION['akun']['email_akun'];
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Font Style -->
+    <link rel="stylesheet" href="fonts/font.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
@@ -81,6 +81,12 @@ $profile = $_SESSION['akun']['email_akun'];
                 switch (@$page) {
                     case 'hapus':
                         include('proses/hapus_pengajuan.php');
+                        break;
+                    case 'detail':
+                        include('proses/detail_pengajuan.php');
+                        break;
+                    case 'info':
+                        include('proses/info_pengajuan.php');
                         break;
 
                     default:
@@ -146,6 +152,8 @@ $profile = $_SESSION['akun']['email_akun'];
                                                             <td>
                                                                 <input type="hidden" name="id" value="<?=$data['id_pengaduan'];?>">
                                                                 <button type="submit" name="hapus" onclick="return confirm('Yakin Ingin Menghapus Ini?')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa fa-trash-alt"></i></button>
+                                                                <a href="?page=info&id=<?= $data['id_pengaduan']; ?>" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Info Pengaduan"><i class="fa fa-file-alt"></i></a>
+                                                                <a href="?page=detail&id=<?= $data['id_pengaduan']; ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Selengkapnya"><i class="fa fa-angle-right"></i></a>
                                                             </td>
                                                         </form>
                                                     </tr>

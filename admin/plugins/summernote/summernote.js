@@ -7562,7 +7562,7 @@
           styleTags: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
           fontNames: [
               'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New',
-              'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande',
+              'Helvetica Neue', 'Helvetica', 'Impact', 'Nunito', 'Lucida Grande',
               'Tahoma', 'Times New Roman', 'Verdana',
           ],
           fontNamesIgnoreCheck: [],

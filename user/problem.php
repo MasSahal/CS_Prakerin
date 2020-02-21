@@ -32,11 +32,10 @@ include('../koneksi.php');
     <link rel="stylesheet" href="../admin/dist/css/style.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="../admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="../admin/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="../admin/plugins/summernote/summernote-bs4.css">
-    <!-- Google Font -->
+    <!-- Font Style -->
+    <link rel="stylesheet" href="../admin/fonts/font.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <style>
@@ -57,7 +56,7 @@ include('../koneksi.php');
         <div class="container mb-0 p-5">
             <div class="row justify-content-center mb-4">
                 <div class="col text-dark">
-                    <h1 style="font-family: 'Nunito', sans-serif;" class=" text-center"><b>Selamat Datang di Web Pelayanan Pengaduan</b></h1>
+                    <h1 style="font-family: 'Nunito', sans-serif;" class="text-center"><b>Selamat Datang di Web Pelayanan Pengaduan</b></h1>
                     <p class="lead text-center"><b>Cs.helper</b> adalah layanan yang bertujuan untuk mengajukan pengaduan masalah.</p>
                 </div>
             </div>
@@ -69,7 +68,7 @@ include('../koneksi.php');
                         $foto = mysqli_query($koneksi, "SELECT * FROM tb_akun WHERE id_akun='$data[id_akun]'");
                         $foto_akun = mysqli_fetch_assoc($foto);
                     ?>
-                    <div class="card card-widget mb-4">
+                    <div class="card card-info card-outline card-widget mb-4">
                         <div class="card-header">
                             <div class="user-block">
                                 <img class="img-circle" src="../admin/file/user/<?=$foto_akun['foto_akun'];?>" alt="User Image">

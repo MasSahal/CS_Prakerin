@@ -37,7 +37,8 @@ include('../koneksi.php');
     <link rel="stylesheet" href="../admin/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="../admin/plugins/summernote/summernote-bs4.css">
-    <!-- Google Font -->
+    <!-- Font Style -->
+    <link rel="stylesheet" href="../admin/fonts/font.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
@@ -68,13 +69,13 @@ include('../koneksi.php');
                             <label for="email">Email<span style="color:rgb(190, 0, 0)">*</span></label>
                             <input type="email" name="email" id="email" class="form-control" placeholder="Masukan email" value="<?= $_SESSION['akun']['email_akun']; ?>" aria-describedby="helpId">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group shadow-none">
                             <label for="masalah">Masalah<span style="color:rgb(190, 0, 0)">*</span></label>
                             <textarea name="masalah" id="masalah" rows="7" class="form-control" placeholder="Masukan permasalahan"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="kategori">Kategori<span style="color:rgb(190, 0, 0)">*</span></label>
-                            <select name="kategori" id="kategori" class="form-control select2-purple">
+                            <select name="kategori" id="kategori" class="form-control">
                                 <option>Pilih Kategori Permasalahan</option>
                                 <?php
                                 $sql = mysqli_query($koneksi, "SELECT * FROM tb_kategori");

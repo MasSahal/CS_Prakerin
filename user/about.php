@@ -22,7 +22,8 @@ include('../koneksi.php');
     <link rel="stylesheet" href="../admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- summernote -->
     <link rel="stylesheet" href="../admin/plugins/summernote/summernote-bs4.css">
-    <!-- Google Font -->
+    <!-- Font Style -->
+    <link rel="stylesheet" href="../admin/fonts/font.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>

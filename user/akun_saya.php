@@ -32,7 +32,8 @@ include('../koneksi.php');
     <link rel="stylesheet" href="../admin/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="../admin/plugins/summernote/summernote-bs4.css">
-    <!-- Google Font -->
+    <!-- Font Style -->
+    <link rel="stylesheet" href="../admin/fonts/font.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
@@ -145,10 +146,17 @@ include('../koneksi.php');
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="col-12">
-                        <h3 style="font-family: 'Nunito', sans-serif;" class="text-center my-2"><b>Motto</b></h3>
+                        <a href="?motto#motto"><h3 style="font-family: 'Nunito', sans-serif;" class="text-center text-dark my-2" id="motto"><b>Motto</b></h3></a>
                         <hr>
                     </div>
-                    <p class="lead text-center"><?= $data['motto_akun']; ?></p>
+                    <?php if (isset($_GET['motto'])) { ?>
+                        <form method="post">
+                            <textarea name="motto_saya" rows="7"class="form-control"><?=str_replace("<br/>","\n", $data['motto_akun']); ?></textarea>
+                            <button type="submit" name="ubah_motto" class="btn btn-sm btn-info my-3">Simpan</button>
+                        </form>
+                    <?php } else{ ?>
+                        <p><?=$data['motto_akun']; ?></p>
+                    <?php } ?>
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -419,4 +427,20 @@ if (isset($_POST['gantipassword'])) {
             }
         }
     }
+}
+if (isset($_POST['ubah_motto'])) {
+    $motto = $_POST['motto_saya'];
+
+    //replace enter ke tag <br>
+    $motto = str_replace(array("\r\n", "\r", "\n"), "<br/>", $motto);
+
+    $ubh_motto = mysqli_query($koneksi, "UPDATE tb_akun SET motto_akun='$motto' WHERE id_akun='$data[id_akun]'");
+
+        if (!$ubh_motto) {
+            echo "<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal ubah motto anda !'});</script>";
+            echo "<meta http-equiv='refresh' content='2;url=akun_saya.php#motto'>";
+        } else {
+            echo "<script>Swal.fire('Good job!','Berhasil ubah motto!','success')</script>";
+            echo "<meta http-equiv='refresh' content='2;url=akun_saya.php#motto'>";
+        }
 }
