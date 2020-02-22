@@ -11,6 +11,7 @@ include('koneksi.php');
   <title>Log in | Cs Helper</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="user/img/favicon.png">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <link rel="stylesheet" href="admin/sweetalert2.min.css">
   <!-- Font Awesome -->
@@ -135,9 +136,9 @@ if (isset($_POST['login'])) {
       $_SESSION['akun'] = $data;
       $_SESSION['akses'] = $data['akses_akun'];
       if ($data['akses_akun'] == 'admin') {
-        echo "<meta http-equiv='refresh' content='0;url=admin/index.php'>";
+        echo "<meta http-equiv='refresh' content='0;url=admin/'>";
       } elseif ($data['akses_akun'] == 'user') {
-        echo "<meta http-equiv='refresh' content='0;url=user/index.php'>";
+        echo "<meta http-equiv='refresh' content='0;url=user/'>";
       }
     }
   }

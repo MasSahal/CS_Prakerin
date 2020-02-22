@@ -2,7 +2,7 @@
 session_start();
 
 include('../koneksi.php');
-$profile = $_SESSION['akun']['email_akun'];
+include('security_admin.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -107,9 +107,19 @@ $profile = $_SESSION['akun']['email_akun'];
                                             <h2 class="font-weight-bold mb-3 text-center">Kirimkan Informasi ke Mading!</h2>
                                             <textarea name="informasi" id="informasi" rows="10" class="form-control"></textarea>
                                             <input type="hidden" name="id_akun" value="<?= $_SESSION['akun']['id_akun']; ?>">
-                                            form-group
-                                            <button type="submit" name="siaran_informasi" class="btn btn-md btn-info">Siarkan Sekarang</button>
                                         </div>
+                                        <div class="form-check mb-4 my-3">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="jenis" id="jenis" value="Penting">
+                                                <span class="text-warning h5 font-weight-bold">Informasi Penting</span>
+                                            </label>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="jenis" id="jenis" value="Darurat">
+                                                <span class="text-danger h5 font-weight-bold">Informasi Darurat</span>
+                                            </label>
+                                        </div>
+                                        <button type="submit" name="siaran_informasi" class="btn btn-md btn-info">Siarkan Sekarang</button>
                                     </form>
                                 </div>
                             </div>
@@ -267,6 +277,24 @@ $profile = $_SESSION['akun']['email_akun'];
     <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip();
+    });
+    
+    </script>
+    <script>
+        $("input:checkbox").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+    var $box = $(this);
+    if ($box.is(":checked")) {
+        // the name of the box is retrieved using the .attr() method
+        // as it is assumed and expected to be immutable
+        var group = "input:checkbox[name='" + $box.attr("name") + "']";
+        // the checked state of the group/box on the other hand will change
+        // and the current value is retrieved using .prop() method
+        $(group).prop("checked", false);
+        $box.prop("checked", true);
+    } else {
+        $box.prop("checked", false);
+    }
     });
     </script>
 </body>

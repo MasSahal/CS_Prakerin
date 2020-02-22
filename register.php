@@ -7,6 +7,7 @@
   <title>Registration | Cs Helper</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="user/img/favicon.png">
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <!-- Font Awesome -->

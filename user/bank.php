@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include('../koneksi.php');
+include('security_user.php');
 ?>
 <!DOCTYPE html>
 <html>

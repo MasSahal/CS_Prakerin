@@ -2,11 +2,7 @@
 session_start();
 
 include('../koneksi.php');
-if (!isset($_SESSION['akun']['email_akun'])) {
-    header("../index.php");
-} else {
-    $profile = $_SESSION['akun']['email_akun'];
-}
+include('security_admin.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,6 +13,7 @@ if (!isset($_SESSION['akun']['email_akun'])) {
     <title>Dashboard | Admin</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="file/favicon.png">
 
     <!-- Font Style -->
     <link rel="stylesheet" href="fonts/font.css">
