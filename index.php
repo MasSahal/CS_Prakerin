@@ -39,7 +39,7 @@ include('koneksi.php');
       <div class="card-body login-card-body">
         <p class="login-box-msg">Silahkan login untuk mulai</p>
 
-        <form method="post">
+        <form method="post" id="quickForm">
           <div class="input-group mb-3">
             <input type="email" class="form-control" placeholder="Email" aria-describedby="emailHelpId" required name="email">
             <div class="input-group-append">
@@ -89,6 +89,9 @@ include('koneksi.php');
   <script src="admin/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- jquery-validation -->
+  <script src="admin/plugins/jquery-validation/jquery.validate.min.js"></script>
+  <script src="admin/plugins/jquery-validation/additional-methods.min.js"></script>
   <!-- AdminLTE App -->
   <script src="admin/dist/js/adminlte.min.js"></script>
   <script type="text/javascript">
@@ -107,6 +110,47 @@ include('koneksi.php');
       })
     });
   </script>
+  <script type="text/javascript">
+$(document).ready(function () {
+  $('#quickForm').validate({
+    rules: {
+      email: {
+        required: true,
+        email: true,
+      },
+      password: {
+        required: true,
+        minlength: 10
+      },
+      terms: {
+        required: true
+      },
+    },
+    messages: {
+      email: {
+        required: "Masukan Email Anda",
+        email: "Silahkan masukan email dengan benar"
+      },
+      password: {
+        required: "Masukan Password Anda",
+        minlength: "Masukan password minimal 10 karakter"
+      },
+      terms: "Silahkan setujui Privasi kami"
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
+});
+</script>
 
 </body>
 

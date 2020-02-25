@@ -1,8 +1,8 @@
 <?php
 session_start();
-error_reporting(0);
+
 include('../koneksi.php');
-include('security_admin.php');
+date_default_timezone_set('ASIA/JAKARTA');
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,8 +13,8 @@ include('security_admin.php');
     <title>Costumer Service</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="file/favicon.png">
 
+    <link rel="stylesheet" href="sweetalert2.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -37,9 +37,8 @@ include('security_admin.php');
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
-    <!-- Font Style -->
-    <link rel="stylesheet" href="fonts/font.css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Sans+Pro&display=swap" rel="stylesheet">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
@@ -54,95 +53,120 @@ include('security_admin.php');
         <?php include("layouts/sidebar.php"); ?>
         <!-- End Sidebar Container -->
 
+
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper" id="content">
-            <?php
-
-            if (isset($_GET['page'])) {
-                $page = $_GET['page'];
-
-                switch (@$page) {
-                    case 'hapus':
-                        include('proses/hapus_pengajuan.php');
-                        break;
-                    case 'detail':
-                        include('proses/detail_pengajuan.php');
-                        break;
-                    case 'info':
-                        include('proses/info_pengajuan.php');
-                        break;
-
-                    default:
-                        echo"";
-                        break;
-                }
-
-            } elseif (!isset($_GET['page'])) { ?>
+        <div class="content-wrapper">
+            <!-- Content Header -->
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Pengaduan - Selesai</h1>
+                            <h1>Riwayat</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                                <li class="breadcrumb-item"><a href="pengaduan_ver.php">Pengaduan - Selesai</a></li>
+                                <li class="breadcrumb-item active">Riwayat Pengaduan</li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
-            </section <!-- Main content -->
+            </section>
+
+
+            <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h5 class="card-title m-0">Daftar Pengaduan</h5>
+                                    <h5 class="card-title m-0">Riwayat Pengaduan</h5>
                                 </div>
                                 <div class="card-body">
+                                    <form method="post">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="awal">Tanggal Awal</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                        </div>
+                                                        <input type="date" class="form-control" data-inputmask-alias="datetime" name="awal" id="awal" data-inputmask-inputformat="mm/dd/yyyy" data-mask>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="akhir">Tanggal Akhir</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                        </div>
+                                                        <input type="date" class="form-control" data-inputmask-alias="datetime" name="akhir" id="akhir" data-inputmask-inputformat="mm/dd/yyyy" data-mask>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-info btn-sm" name="cari_riwayat">Cari Sekarang</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php if (isset($_POST['cari_riwayat'])) { 
+            
+            $tgl_awal = $_POST['awal'];
+            $tgl_akhir = $_POST['akhir'];
+
+            $sql = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE tanggal_pengaduan BETWEEN '$tgl_awal' AND '$tgl_akhir' ORDER BY tanggal_pengaduan ASC");
+            
+            ?>
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body">
+                                    <div class="info text-center mb-4">
+                                        <h2 class="font-weight-bold">Laporan Pengaduan <?=date('d/m/Y', strtotime($tgl_awal));?> Sampai <?=date('d/m/Y', strtotime($tgl_akhir));?></h2>
+                                        <hr class="my-3">
+                                    </div>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped" id="table1">
+                                        <table class="table table-striped" id="table"> 
                                             <thead class="text-light bg-info">
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nama</th>
                                                     <th>Kategori</th>
-                                                    <th>Lampiran</th>
                                                     <th>Tgl Pengaduan</th>
-                                                    <th>Aksi</th>
+                                                    <th>Status Pengaduan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
-                                                <?php
-                                                $query = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE status_pengaduan='Selesai'");
+                                            <?php
                                                 $no = 0;
-                                                while ($data = mysqli_fetch_assoc($query)) {
-
-                                                    //pilih kat sesuai id kategori
-                                                    $sql_kat = mysqli_query($koneksi, "SELECT * FROM tb_kategori WHERE id_kategori='$data[id_kategori]'");
-                                                    $kat = mysqli_fetch_assoc($sql_kat);
-                                                ?>
+                                                while($data = mysqli_fetch_assoc($sql)){ ?>
                                                     <tr>
-                                                        <td><?= $no += 1; ?></td>
-                                                        <td><?= $data['nama_pengadu']; ?></td>
-                                                        <td><?= $kat['kategori']; ?></td>
-                                                        <td><img src="../admin/file/<?= $data['lampiran_pengaduan']; ?>" alt="<?= $data['lampiran_pengaduan']; ?>" width="100"></td>
-                                                        <td><?= date('D, M Y', strtotime($data['tanggal_pengaduan'])); ?></td>
-                                                        <form method="post">
-                                                            <td>
-                                                                <input type="hidden" name="id" value="<?=$data['id_pengaduan'];?>">
-                                                                <button type="submit" name="hapus" onclick="return confirm('Yakin Ingin Menghapus Ini?')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa fa-trash-alt"></i></button>
-                                                                <a href="?page=info&id=<?= $data['id_pengaduan']; ?>" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Info Pengaduan"><i class="fa fa-file-alt"></i></a>
-                                                                <a href="?page=detail&id=<?= $data['id_pengaduan']; ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Selengkapnya"><i class="fa fa-angle-right"></i></a>
-                                                            </td>
-                                                        </form>
+                                                        <td><?=$no+=1;?></td>
+                                                        <td><?=$data['nama_pengadu'];?></td>
+                                                        <?php   $sql_kat = mysqli_query($koneksi, "SELECT * FROM tb_kategori WHERE id_kategori='$data[id_kategori]'");
+                                                                $kat = mysqli_fetch_assoc($sql_kat);
+                                                        ?>
+                                                        <td><?=$kat['kategori'];?></td>
+                                                        <td><?=date('D, d M Y', strtotime($data['tanggal_pengaduan']));?></td>
+                                                        <td><?=$data['status_pengaduan'];?></td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
                                         </table>
+                                        <a href="print.php?awal=<?=$tgl_awal;?>&akhir=<?=$tgl_akhir;?>"" class="btn btn-sm btn-success" target="_blank">Print Sekarang</a>
                                     </div>
                                 </div>
                             </div>
@@ -150,41 +174,10 @@ include('security_admin.php');
                     </div>
                 </div>
             </div>
+            <?php } ?>
             <!-- /.content -->
-        <?php } ?>
         </div>
-        <?php
-        function time_elapsed_string($datetime, $full = false)
-        {
-            date_default_timezone_set('ASIA/JAKARTA');
-            $now = new DateTime;
-            $ago = new DateTime($datetime);
-            $diff = $now->diff($ago);
-
-            $diff->w = floor($diff->d / 7);
-            $diff->d -= $diff->w * 7;
-
-            $string = array(
-                'y' => 'Tahun',
-                'm' => 'Bulan',
-                'w' => 'Minggu',
-                'd' => 'Hari',
-                'h' => 'Jam',
-                'i' => 'Menit',
-                's' => 'Detik',
-            );
-            foreach ($string as $k => &$v) {
-                if ($diff->$k) {
-                    $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? ' yang' : ' yang');
-                } else {
-                    unset($string[$k]);
-                }
-            }
-
-            if (!$full) $string = array_slice($string, 0, 1);
-            return $string ? implode(', ', $string) . ' lalu' : 'baru saja';
-        }
-        ?>
+        <!-- /.content-wrapper -->
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <strong>Copyright &copy; 2014-2019 <a href="http://massahalofficial.site">Mas Sahal</a>.</strong>
@@ -207,11 +200,6 @@ include('security_admin.php');
     <!-- jQuery UI 1.11.4 -->
     <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
@@ -250,9 +238,7 @@ include('security_admin.php');
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
     <script>
         $(function() {
-            $("#table1").DataTable();
-            $("#table2").DataTable();
-            $('#table3').DataTable({
+            $('#table').DataTable({
                 "paging": true,
                 "lengthChange": false,
                 "searching": false,
@@ -260,35 +246,14 @@ include('security_admin.php');
                 "info": true,
                 "autoWidth": false,
             });
+
+            //Timepicker
+            $('.awal').datetimepicker({
+            format: 'LT'
+            });
         });
     </script>
 </body>
 
 </html>
-<?php
-if(isset($_POST['hapus'])) {
-    $id_hapus = $_POST['id'];
-
-
-    //hapus gambar
-    $sqli = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE id_pengaduan='$id_hapus'");
-    $dataa = mysqli_fetch_assoc($sqli);
-
-    chdir("file/");
-    chown($dataa['lampiran_pengaduan'],'root');
-    $dat = unlink(chdir("file/").$dataa['lampiran_pengaduan']);
-
-    $hapusi = mysqli_query($koneksi,"DELETE FROM tb_pengaduan WHERE id_pengaduan='$id_hapus'");
-    
-    //hapus komentar yg nyangkut dgn id_pengaduan
-    mysqli_query($koneksi, "DELETE FROM tb_balasan WHERE id_pengaduan='$id_hapus'");
-
-    if ($hapusi) {
-        echo"<script>Swal.fire('Good job!','Berhasil Menghapus Pengajuan !','success')</script>";
-        echo"<meta http-equiv='refresh' content='1;url=problems_ver.php'>";
-    }else{
-        echo"<script>Swal.fire({icon: 'error',title: 'Oops...',text: 'Gagal Menghapus Pengajuan !'});</script>";
-        echo"<meta http-equiv='refresh' content='1;url=problems_ver.php'>";
-    }
-}
-?>
+<!-- /.content-wrapper -->

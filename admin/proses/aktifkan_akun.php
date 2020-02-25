@@ -1,6 +1,6 @@
 <?php
 $id = $_GET['id'];
-
+error_reporting(0);
     $aktif = mysqli_query($koneksi,"UPDATE tb_akun SET status_akun='Aktif' WHERE id_akun='$id'");
     if ($aktif) {
         echo"<script>Swal.fire('Good job!','Berhasil Mengaktifkan Akun !','success')</script>";

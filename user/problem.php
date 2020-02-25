@@ -41,17 +41,18 @@ include('security_user.php');
     <link href="https://fonts.googleapis.com/css?family=Nunito|Source+Sans+Pro&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <style>
-        #close{
-            color:transparent;
+        #close {
+            color: transparent;
         }
-        #close:hover{
-            color:darkgray;
+
+        #close:hover {
+            color: darkgray;
         }
     </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed bg-light">
-    <?php include('layouts/header.php');?>
+    <?php include('layouts/header.php'); ?>
 
     <!-- end wrapper form-->
     <div class="wrapper">
@@ -70,52 +71,87 @@ include('security_user.php');
                         $foto = mysqli_query($koneksi, "SELECT * FROM tb_akun WHERE id_akun='$data[id_akun]'");
                         $foto_akun = mysqli_fetch_assoc($foto);
                     ?>
-                    <div class="card card-info card-outline card-widget mb-4">
-                        <div class="card-header">
-                            <div class="user-block">
-                                <img class="img-circle" src="../admin/file/user/<?=$foto_akun['foto_akun'];?>" alt="User Image">
-                                <span class="username text-primary"><?=$data['nama_pengadu'];?></span>
-                                <span class="description"><?=time_elapsed_string($data['tanggal_pengaduan']);?></span>
+                        <div class="card card-info card-outline card-widget mb-4">
+                            <div class="card-header">
+                                <div class="user-block">
+                                    <img class="img-circle" src="../admin/file/user/<?= $foto_akun['foto_akun']; ?>" alt="User Image">
+                                    <span class="username text-primary"><?= $data['nama_pengadu']; ?></span>
+                                    <span class="description"><?= time_elapsed_string($data['tanggal_pengaduan']); ?></span>
+                                </div>
+                                <!-- /.user-block -->
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Mark as read">
+                                        <i class="far fa-circle"></i></button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <!-- /.card-tools -->
                             </div>
-                            <!-- /.user-block -->
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Mark as read">
-                                    <i class="far fa-circle"></i></button>
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
-                                </button>
+                            <!-- /.card-header -->
+                            <!-- /.card-body -->
+                            <div class="card-body">
+                                <div class="bg-dark">
+                                    <center>
+                                        <img class="img-fluid pad" src="../admin/file/<?= $data['lampiran_pengaduan']; ?>" alt="Photo">
+                                    </center>
+                                </div>
+                                <?php
+                                $id_kat = $data['id_kategori'];
+                                $kat = mysqli_query($koneksi, "SELECT * FROM tb_kategori WHERE id_kategori='$id_kat'");
+                                while ($kat2 = mysqli_fetch_array($kat)) {
+                                    echo "<h3 class='font-weight-bold my-3'>{$kat2['kategori']}</h3>";
+                                }
+                                ?>
+                                <p><?= $data['deskripsi_pengaduan']; ?></p>
                             </div>
-                            <!-- /.card-tools -->
                         </div>
-                        <!-- /.card-header -->
-                        <!-- /.card-body -->
-                        <div class="card-body">
-                            <div class="bg-dark">
-                                <center>
-                                    <img class="img-fluid pad" src="../admin/file/<?=$data['lampiran_pengaduan'];?>" alt="Photo">
-                                </center>
-                            </div>
-                            <?php
-                            $id_kat = $data['id_kategori'];
-                            $kat = mysqli_query($koneksi, "SELECT * FROM tb_kategori WHERE id_kategori='$id_kat'");
-                            while ($kat2 = mysqli_fetch_array($kat)) {
-                                echo"<h3 class='font-weight-bold my-3'>{$kat2['kategori']}</h3>";
-                            }
-                            ?>
-                            <p><?=$data['deskripsi_pengaduan'];?></p>
-                        </div>                        
-                    </div>
                     <?php } ?>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 px-4" style="position:no-scroll;float:right">
-                    <table class="table table-borderless">
-                        <thead><tr><th  class="text-center">Filter</th></tr></thead>
-                        <tr><td><a href="#" class="btn btn-block btn-default">Sub-menu</a></td></tr>
-                        <tr><td><a href="#" class="btn btn-block btn-default">Sub-menu</a></td></tr>
-                        <tr><td><a href="#" class="btn btn-block btn-default">Sub-menu</a></td></tr>
-                        <tr><td><a href="#" class="btn btn-block btn-default">Sub-menu</a></td></tr>
-                    </table>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="text-body mb-3 mt-2 ml-2">
+                        <h3 class="font-weight-bold">Kategori Masalah</h3>
+                    </div>
+                    <?php
+                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_kategori");
+                    while ($data = mysqli_fetch_assoc($sql)) {
+                    ?>
+                        <div class="card card-outline card-success hover mb-4 mt-2 ml-2 collapsed-card">
+                            <div class="card-header">
+                                <h5 class="card-title font-weight-bold text-black-50"><?= $data['kategori']; ?></h5>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <p><?= $data['subjek_kategori']; ?></p>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    <?php } ?>
+                    <div class="mb-4 pt-4 ml-2">
+                        <h3 class="font-weight-bold my-3">Iklan</h3>
+                        <div class="card card-blue">
+                            <a href="http://www.sp2se.id" target="_blank">
+                                <img class="card-img-top" src="img/iklan.png" alt="Card image cap">
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="http://e-umkm.com" target="_blank">
+                                <img class="card-img-top" src="img/eumkm.png" alt="E-UMKM">
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="http://smtindonesia.com" target="_blank">
+                                <img class="card-img-top" src="img/smt.png" alt="SMT INDONESIA">
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,15 +177,16 @@ include('security_user.php');
     </div>
     <!-- wrapper footer -->
     <?php
-    function time_elapsed_string($datetime, $full = false) {
+    function time_elapsed_string($datetime, $full = false)
+    {
         date_default_timezone_set('ASIA/JAKARTA');
         $now = new DateTime;
         $ago = new DateTime($datetime);
         $diff = $now->diff($ago);
-    
+
         $diff->w = floor($diff->d / 7);
         $diff->d -= $diff->w * 7;
-    
+
         $string = array(
             'y' => 'Tahun',
             'm' => 'Bulan',
@@ -166,7 +203,7 @@ include('security_user.php');
                 unset($string[$k]);
             }
         }
-    
+
         if (!$full) $string = array_slice($string, 0, 1);
         return $string ? implode(', ', $string) . ' lalu' : 'baru saja';
     }
@@ -224,7 +261,7 @@ if (isset($_POST['komen'])) {
     $sql = mysqli_query($koneksi, "INSERT INTO tb_komentar (id_pengaduan, id_akun, username_komentar, komentar, tanggal_komentar) VALUES ('$id_pengaduan','$id_yg_komen','$username_yg_komen','$komentar','$tanggal')");
     if ($sql) {
         echo "<meta http-equiv='refresh' content='0;url=problem.php'>";
-    }else{
+    } else {
         echo "<script>Swal.fire({icon: 'error',title: 'Kesalahan'});</script>";
         echo "<meta http-equiv='refresh' content='2;url=problem.php'>";
     }
@@ -234,9 +271,9 @@ if (isset($_POST['hapus_komentar'])) {
     $sql = mysqli_query($koneksi, "DELETE FROM tb_komentar WHERE id_komentar='$id_komen'");
     if ($sql) {
         echo "<script>Swal.fire('Good job!','Berhasil menghapus komentar !','success')</script>";
-        $id_komen-=1;
+        $id_komen -= 1;
         echo "<meta http-equiv='refresh' content='2;url=problem.php#komentar'>";
-    }else{
+    } else {
         echo "<script>Swal.fire({icon: 'error',title: 'Kesalahan'});</script>";
         echo "<meta http-equiv='refresh' content='2;url=problem.php'>";
     }

@@ -65,7 +65,7 @@ include('security_user.php');
                         $sql2 = mysqli_query($koneksi, "SELECT * FROM tb_akun WHERE id_akun='$data[id_akun]'");
                         $data2 = mysqli_fetch_assoc($sql2);
                     ?>
-                        <div class="card <?php if($data['jenis_info']=='Penting'){ echo 'card-warning';} else if($data['jenis_info']=='Darurat'){ echo 'card-danger';}else{echo'card-secondary';}?> card-outline card-info mb-4">
+                        <div class="card <?php if($data['jenis_info']=='Penting'){ echo 'card-warning';} else if($data['jenis_info']=='Darurat'){ echo 'card-danger';}else{echo'card-secondary';}?> card-outline mb-4">
                             <div class="card-header">
                                 <div class="user-block">
                                     <img class="img-circle" src="../admin/file/user/<?= $data2['foto_akun']; ?>" alt="User Image">
@@ -104,30 +104,24 @@ include('security_user.php');
                     <?php } ?>
                 </div>
                 <div class="col-4">
-                    <div class="text-body mb-5 mt-2">
-                        <h2 class="font-weight-bold text-center text-black-50">Kategori Masalah</h2>
-                    </div>
-                    <?php
-                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_kategori");
-                    while ($data = mysqli_fetch_assoc($sql)) {
-                    ?>
-                        <div class="card card-outline card-success hover mb-4 m-2 collapsed-card">
-                            <div class="card-header">
-                                <h5 class="card-title font-weight-bold text-black-50"><?= $data['kategori']; ?></h5>
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                                <!-- /.card-tools -->
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <p><?= $data['subjek_kategori']; ?></p>
-                            </div>
-                            <!-- /.card-body -->
+                    <div class="mb-4 ml-2">
+                        <h3 class="font-weight-bold mb-3">Iklan</h3>
+                        <div class="card">
+                            <a href="http://www.sp2se.id" target="_blank">
+                                <img class="card-img-top" src="img/iklan.png" alt="SP2SE">
+                            </a>
                         </div>
-                    <?php } ?>
+                        <div class="card">
+                            <a href="http://e-umkm.com" target="_blank">
+                                <img class="card-img-top" src="img/eumkm.png" alt="E-UMKM">
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="http://smtindonesia.com" target="_blank">
+                                <img class="card-img-top" src="img/smt.png" alt="SMT INDONESIA">
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -6,9 +6,9 @@
 
 
 admin
-    user : admin@localhost.com
-    pass : admin1234567890
+    user : admin@cshelper.com
+    pass : admin@cshelper.com
 
 user
-    user : user@localhost.com
-    pass : user@localhost.com
+    user : user@cshelper.com
+    pass : user@cshelper.com

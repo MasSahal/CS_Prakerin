@@ -116,7 +116,7 @@
 </body>
 </html>
 <?php
-
+date_default_timezone_set('ASIA/JAKARTA');
 if (isset($_POST['daftar'])) {
   $username = $_POST['username'];
   $email = $_POST['email'];

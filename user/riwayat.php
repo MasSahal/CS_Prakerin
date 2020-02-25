@@ -134,7 +134,7 @@ include('security_user.php');
                             data: {
                                 labels: ["Terverifikasi", "Diproses", "Dalam Penanganan", "Selesai"],
                                 datasets: [{
-                                    label: '# of Votes',
+                                    label: 'Jumlah Pengaduan',
                                     data: [
                                         <?php
                                         $sql_pending = mysqli_query($koneksi, "SELECT * FROM tb_pengaduan WHERE status_pengaduan='Terverifikasi' AND id_akun='$id_profile'");

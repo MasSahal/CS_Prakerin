@@ -108,7 +108,7 @@ include('security_admin.php');
                             <div class="col">
                                 <div class="card card-primary card-outline">
                                     <div class="card-header">
-                                        <h5 class="card-title m-0">Daftar Pengaduan - Diproses</h5>
+                                        <h5 class="card-title m-0">Daftar Pengaduan - Dalam Penanganan</h5>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -168,12 +168,12 @@ include('security_admin.php');
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Pengaduan - Diproses</h1>
+                                <h1>Pengaduan - Dalam Penanganan</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="pengaduan_ver.php">Pengaduan - Diproses</a></li>
+                                    <li class="breadcrumb-item"><a href="pengaduan_ver.php">Pengaduan - Dalam Penanganan</a></li>
                                 </ol>
                             </div>
                         </div>

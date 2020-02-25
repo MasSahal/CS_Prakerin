@@ -70,8 +70,8 @@ include('security_admin.php');
           case 'edit_akun':
             include("proses/edit_akun.php");
             break;
-          case 'hapus':
-            include("proses/hapus.php");
+          case 'hapus_akun':
+            include("proses/hapus_akun.php");
             break;
           case 'aktif_akun':
             include("proses/aktifkan_akun.php");

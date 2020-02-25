@@ -1,7 +1,7 @@
 <?php
-
+error_reporting(0);
 $id = $_GET['id'];
-$hapus = $koneksi->query("DELETE FROM tb_akun WHERE id_akun='$id'");
+$hapus = mysqli_query($koneksi,"DELETE FROM tb_akun WHERE id_akun='$id'");
 
 if ($hapus) {
     echo"<script>Swal.fire('Good job!','Berhasil Menghapus Akun !','success')</script>";

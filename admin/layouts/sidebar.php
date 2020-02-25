@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="index.php" class="brand-link">
         <img src="file/logo-web.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Cs.Helper</span>
     </a>
@@ -46,9 +46,8 @@
                             Kategori
                             <span class="right badge badge-danger">
                                 <?php
-                                $kategori = $koneksi->query('SELECT * FROM tb_kategori');
-                                $jml_kategori = $kategori->num_rows;
-                                echo $jml_kategori;
+                                $kategori = mysqli_query($koneksi,"SELECT * FROM tb_kategori");
+                                echo mysqli_num_rows($kategori);
                                 ?>
                             </span>
                         </p>
@@ -61,11 +60,18 @@
                             Akun
                             <span class="right badge badge-success">
                                 <?php
-                                $akun = $koneksi->query("SELECT * FROM tb_akun");
-                                $jml_akun = $akun->num_rows;
-                                echo $jml_akun;
+                                $akun =  mysqli_query($koneksi,"SELECT * FROM tb_akun");
+                                echo mysqli_num_rows($akun);
                                 ?>
                             </span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="riwayat.php" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>
+                            Riwayat
                         </p>
                     </a>
                 </li>
@@ -81,25 +87,57 @@
                         <li class="nav-item">
                             <a href="problems_ver.php" class="nav-link">
                                 <i class="fa fa-paste nav-icon"></i>
-                                <p>Terverifikasi</p>
+                                <p>
+                                    Terverifikasi
+                                    <span class="right badge badge-info">
+                                        <?php
+                                        $verif = mysqli_query($koneksi,"SELECT * FROM tb_pengaduan WHERE status_pengaduan='Terverifikasi'");
+                                        echo mysqli_num_rows($verif);
+                                        ?>
+                                    </span>
+                                </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="problems_pro.php" class="nav-link">
                                 <i class="fas fa-spinner fa-pulse nav-icon"></i>
-                                <p>Diproses</p>
+                                <p>
+                                    Diproses
+                                    <span class="right badge badge-info">
+                                        <?php
+                                        $proses = mysqli_query($koneksi,"SELECT * FROM tb_pengaduan WHERE status_pengaduan='Diproses'");
+                                        echo mysqli_num_rows($proses);
+                                        ?>
+                                    </span>
+                                </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="problems_pen.php" class="nav-link">
                                 <i class="fas fa-cog fa-pulse nav-icon"></i>
-                                <p>Dalam Penanganan</p>
+                                <p>
+                                    Dalam Penanganan
+                                    <span class="right badge badge-info">
+                                        <?php
+                                        $penanganan = mysqli_query($koneksi,"SELECT * FROM tb_pengaduan WHERE status_pengaduan='Dalam Penanganan'");
+                                        echo mysqli_num_rows($penanganan);
+                                        ?>
+                                    </span>
+                                </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="problems_sel.php" class="nav-link">
                                 <i class="fa fa-check nav-icon"></i>
-                                <p>Selesai</p>
+                                <p>
+                                    Selesai
+                                    <span class="right badge badge-info">
+                                        <?php
+                                        $selesai = mysqli_query($koneksi,"SELECT * FROM tb_pengaduan WHERE status_pengaduan='Selesai'");
+                                        echo mysqli_num_rows($selesai);
+                                        ?>
+                                    </span>
+                                </p>
                             </a>
                         </li>
                     </ul>

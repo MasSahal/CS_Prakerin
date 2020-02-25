@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     $id = $_GET['id'];
     $nonaktif = mysqli_query($koneksi,"UPDATE tb_akun SET status_akun='Tidak Aktif' WHERE id_akun='$id'");
     if ($nonaktif) {

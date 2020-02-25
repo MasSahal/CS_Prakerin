@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2020 at 07:10 AM
+-- Generation Time: Feb 25, 2020 at 07:28 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -47,13 +47,41 @@ CREATE TABLE `tb_akun` (
 --
 
 INSERT INTO `tb_akun` (`id_akun`, `username_akun`, `email_akun`, `telepon_akun`, `password_akun`, `alamat_akun`, `status_akun`, `akses_akun`, `registrasi_akun`, `motto_akun`, `foto_akun`) VALUES
-(1, 'admin', 'admin@localhost.com', 1234567, '6b71dfdc4c5603272482f5b80db96a0a', 'Gunungjati - Cirebon', 'Aktif', 'admin', '2020-01-16', '', 'user.png'),
-(11, 'Nashiruddin Sahal', 'user@localhost.com2', 2147483644, 'bd3ffb46e7f751c1d27e1c338fa73e14', 'Gunungjati - Cirebon', 'Aktif', 'user', '2020-01-17', 'Banyak kata-kata motivasi lain yang sejalan dengan apa yang diungkapkan Donny dalam bukunya. Misalnya seperti kalimat ‘rumput tetangga selalu terlihat lebih hijau’. Yang memberikan pesan bahwa jika hanya fokus pada orang lain, diri sendiri tidak akan pernah bahagia.Alasannya sederhana, karena terlalu memperhatikan apa yang orang lain miliki dan mampu lakukan, akan bersikap terlalu keras pada diri sendiri. Ini dapat menyebabkan rasa ketidakpuasan yang terlalu berlebihan dan sering menyalahkan diri. Kuncinya adalah selalu bersyukur atas apa yang dimiliki dan kemampuan diri.', 'sahal.png'),
+(1, 'admin', 'admin2@localhost.com', 1234567, '8c396daf174e0bfa14adfaf6225312a9', 'Gunungjati - Cirebon', 'Aktif', 'admin', '2020-01-16', '', 'user.png'),
+(11, 'Nashiruddin Sahal', 'user@localhost.com2', 2147483644, 'bd3ffb46e7f751c1d27e1c338fa73e14', 'Gunungjati - Cirebon', 'Aktif', 'user', '2020-01-17', 'Banyak kata-kata motivasi lain yang sejalan dengan apa yang diungkapkan Donny dalam bukunya. <br/><br/>Misalnya seperti kalimat rumput tetangga selalu terlihat lebih hijau. <br/>Yang memberikan pesan bahwa jika hanya fokus pada orang lain, diri sendiri tidak akan pernah bahagia.<br/>Alasannya sederhana, karena terlalu memperhatikan apa yang orang lain miliki dan mampu lakukan, akan bersikap terlalu keras pada diri sendiri. <br/>Ini dapat menyebabkan rasa ketidakpuasan yang terlalu berlebihan dan sering menyalahkan diri. <br/>Kuncinydwdwdwdwdwa adalah selalu bersyukur atas apa yang dimiliki dan kemampuan diri.', 'sahal.png'),
 (18, 'Zahrina', 'sahal2@localhost.com', 324243, '3594cedbc9b8a591b25b2b360ebe8520', 'wf', 'Aktif', 'user', '2020-01-27', 'cdcdcdsc', 'user.png'),
-(19, 'abusahl444@gmail.com', 'abusahl444@gmail.com', 3324234, '88f23187e687495ee5b34ce2327445b1', 'sffwewf', 'Aktif', 'user', '2020-02-09', '', 'user.png'),
-(20, 'danu', 'danuartha@localhost.com', 23456, 'dd7556665c99352ecda3d3bce0192deb', 'Jagasatru', 'Aktif', 'user', '2020-02-12', '', 'user.png'),
-(21, 'siswa', 'siswa@localhost.com', 23456, 'bf4c305863ef2ccbf2e576e8411e0f8b', 'Gunung Sari', 'Aktif', 'user', '2020-02-12', '', 'user.png'),
-(22, 'mawl', 'mawl@localhost.com', 35467, '7aaf0f734b87d71fd9993ce7bffbb6f2', 'Plumbon', 'Aktif', 'user', '2020-02-12', '', 'user.png');
+(20, 'danu', 'danuartha@localhost.com', 23456, 'dd7556665c99352ecda3d3bce0192deb', 'Jagasatru', 'Tidak Aktif', 'user', '2020-02-12', '', 'user.png'),
+(21, 'siswa', 'siswa@localhost.com', 23456, 'bf4c305863ef2ccbf2e576e8411e0f8b', 'Gunung Sari', 'Tidak Aktif', 'user', '2020-02-12', '', 'user.png'),
+(29, 'admin', 'admin@cshelper.com', 98778673, 'be9f71515f7a279d1083c66687b75dd4', 'Cirebon', 'Aktif', 'admin', '2020-02-25', '', 'user.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_balasan`
+--
+
+CREATE TABLE `tb_balasan` (
+  `id_balasan` int(11) NOT NULL,
+  `id_pengaduan` int(11) NOT NULL,
+  `id_akun` int(100) NOT NULL,
+  `balasan` text NOT NULL,
+  `tanggal_balasan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_informasi`
+--
+
+CREATE TABLE `tb_informasi` (
+  `id_info` int(11) NOT NULL,
+  `id_akun` int(11) NOT NULL,
+  `info` text NOT NULL,
+  `tanggal_info` datetime NOT NULL,
+  `status_info` varchar(20) NOT NULL,
+  `jenis_info` varchar(50) NOT NULL DEFAULT 'Umum'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -74,12 +102,27 @@ CREATE TABLE `tb_kategori` (
 INSERT INTO `tb_kategori` (`id_kategori`, `kategori`, `subjek_kategori`) VALUES
 (1, 'Internet bermasalah', 'Internet bermasalah'),
 (2, 'Koneksi acces point lambat', 'Koneksi acces point lambat'),
-(3, 'Web Rusak /server rusak', 'Web Rusak /server rusak'),
-(4, 'Internet gagal terhubung', 'Internet gagal terhubung'),
 (5, 'cctv nggk konek', 'cctv nggk konek'),
-(6, 'Biaya tidak sesuai tarif', 'Biaya tidak sesuai tarif'),
 (7, 'Sudah bayar tpi blm konfirmasi', 'Sudah bayar tpi blm konfirmasi di server'),
 (8, 'Internet mati, nggk bisa nonton violet evergarden', 'Internet mati, nggk bisa nonton violet evergarden');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pengaduan`
+--
+
+CREATE TABLE `tb_pengaduan` (
+  `id_pengaduan` int(11) NOT NULL,
+  `id_kategori` int(11) NOT NULL,
+  `id_akun` int(11) NOT NULL,
+  `nama_pengadu` varchar(100) NOT NULL,
+  `deskripsi_pengaduan` longtext NOT NULL,
+  `lampiran_pengaduan` varchar(100) NOT NULL,
+  `status_pengaduan` varchar(20) NOT NULL DEFAULT 'Terverifikasi',
+  `tanggal_pengaduan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `jenis_pengaduan` varchar(25) NOT NULL DEFAULT 'Public'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -92,10 +135,28 @@ ALTER TABLE `tb_akun`
   ADD PRIMARY KEY (`id_akun`);
 
 --
+-- Indexes for table `tb_balasan`
+--
+ALTER TABLE `tb_balasan`
+  ADD PRIMARY KEY (`id_balasan`);
+
+--
+-- Indexes for table `tb_informasi`
+--
+ALTER TABLE `tb_informasi`
+  ADD PRIMARY KEY (`id_info`);
+
+--
 -- Indexes for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
   ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indexes for table `tb_pengaduan`
+--
+ALTER TABLE `tb_pengaduan`
+  ADD PRIMARY KEY (`id_pengaduan`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -105,13 +166,31 @@ ALTER TABLE `tb_kategori`
 -- AUTO_INCREMENT for table `tb_akun`
 --
 ALTER TABLE `tb_akun`
-  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `tb_balasan`
+--
+ALTER TABLE `tb_balasan`
+  MODIFY `id_balasan` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_informasi`
+--
+ALTER TABLE `tb_informasi`
+  MODIFY `id_info` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tb_pengaduan`
+--
+ALTER TABLE `tb_pengaduan`
+  MODIFY `id_pengaduan` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -105,10 +105,15 @@ include('security_admin.php');
                                     <form method="post">
                                         <div class="form-group">
                                             <h2 class="font-weight-bold mb-3 text-center">Kirimkan Informasi ke Mading!</h2>
-                                            <textarea name="informasi" id="informasi" rows="10" class="form-control"></textarea>
+                                            <textarea name="informasi" id="informasi" required rows="10" class="form-control"></textarea>
                                             <input type="hidden" name="id_akun" value="<?= $_SESSION['akun']['id_akun']; ?>">
                                         </div>
                                         <div class="form-check mb-4 my-3">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" checked name="jenis" id="jenis" value="Umum">
+                                                <span class="text-dark h5 font-weight-bold">Informasi Umum</span>
+                                            </label>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <label class="form-check-label">
                                                 <input type="checkbox" class="form-check-input" name="jenis" id="jenis" value="Penting">
                                                 <span class="text-warning h5 font-weight-bold">Informasi Penting</span>
